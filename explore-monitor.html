@@ -1,0 +1,704 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Explore &amp; Monitor | CrowdSense — Smart Queue &amp; Crowd Management</title>
+  
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+  
+  <!-- Leaflet CSS for Map -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
+
+  <!-- Core Styles -->
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+
+  <!-- =========================================================================
+       Navbar
+       ========================================================================= -->
+  <header class="site-header">
+    <div class="container nav-container">
+      <a href="index.html" class="nav-brand">
+        <div class="nav-logo-icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color: var(--cyan-electric)">
+            <path d="M2 12h2a8 8 0 0 1 16 0h2"></path>
+            <path d="M6 12h2a4 4 0 0 1 8 0h2"></path>
+            <circle cx="12" cy="12" r="1.5" fill="var(--cyan-electric)"></circle>
+          </svg>
+        </div>
+        <span>Crowd<span style="color: var(--cyan-electric)">Sense</span></span>
+      </a>
+
+      <nav aria-label="Primary Navigation">
+        <ul class="nav-links">
+          <li><a href="index.html" class="nav-link">Home</a></li>
+          <li><a href="visit-planner.html" class="nav-link" style="color: var(--cyan-electric)">Smart Visit Planner</a></li>
+          <li><a href="explore-monitor.html" class="nav-link active">Explore &amp; Monitor</a></li>
+          <li><a href="locations.html" class="nav-link">Locations</a></li>
+          <li><a href="simulator.html" class="nav-link">Crowd Simulator</a></li>
+          <li><a href="sensor-lab.html" class="nav-link">Sensor &amp; IoT Lab</a></li>
+          <li><a href="learn.html" class="nav-link">Learn</a></li>
+        </ul>
+      </nav>
+
+      <div class="nav-actions">
+        <a href="dashboard.html" class="btn-primary">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <rect width="7" height="9" x="3" y="3" rx="1"></rect>
+            <rect width="7" height="5" x="14" y="3" rx="1"></rect>
+            <rect width="7" height="9" x="14" y="12" rx="1"></rect>
+            <rect width="7" height="5" x="3" y="16" rx="1"></rect>
+          </svg>
+          Open Dashboard
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <!-- =========================================================================
+       Page Header
+       ========================================================================= -->
+  <section style="padding: 2.5rem 0 1rem 0; text-align: center;">
+    <div class="container">
+      <div class="badge-tech">
+        <span class="sensor-dot"></span>
+        ENTC • SMART CITY IoT • MUMBAI TRANSPORT
+      </div>
+      <h1 style="font-size: 2.85rem; font-weight: 800; margin: 0.75rem 0 0.5rem 0;">
+        Explore Mumbai. <span class="text-gradient">Monitor Smarter.</span>
+      </h1>
+      <p style="font-size: 1.1rem; color: var(--text-secondary); max-width: 720px; margin: 0 auto;">
+        Discover real transport locations, explore ENTC sensor technology, and understand how connected hardware can improve crowd management.
+      </p>
+
+      <!-- Three-Tab Switcher -->
+      <div class="page-nav-tabs">
+        <button class="page-nav-tab active" data-tab="location-finder">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"></path>
+            <circle cx="12" cy="10" r="3"></circle>
+          </svg>
+          Location Finder &amp; Map
+        </button>
+        <button class="page-nav-tab" data-tab="entc-lab">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <rect width="18" height="18" x="3" y="3" rx="2"></rect>
+            <path d="M7 7h10v10H7z"></path>
+          </svg>
+          ENTC Sensor &amp; Hardware Lab
+        </button>
+        <button class="page-nav-tab" data-tab="crowd-intelligence">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <line x1="18" y1="20" x2="18" y2="10"></line>
+            <line x1="12" y1="20" x2="12" y2="4"></line>
+            <line x1="6" y1="20" x2="6" y2="14"></line>
+          </svg>
+          Crowd Intelligence &amp; Architecture
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <main class="container">
+    <!-- =======================================================================
+         TAB 1: SMART LOCATION FINDER & MUMBAI TRANSPORT MAP
+         ======================================================================= -->
+    <div id="tab-location-finder" class="page-tab-panel active">
+      <!-- Search & Controls Bar -->
+      <div class="glass-panel" style="padding: 1.25rem 1.5rem; margin-bottom: 1.5rem;">
+        <div style="display: flex; gap: 0.75rem; flex-wrap: wrap; margin-bottom: 1rem;">
+          <div style="flex: 1; min-width: 280px; position: relative;">
+            <input 
+              type="text" 
+              id="locationSearchInput" 
+              placeholder="Search railway stations, bus depots, areas or landmarks..."
+              style="width: 100%; padding: 0.75rem 1rem 0.75rem 2.5rem; background: rgba(7, 17, 31, 0.85); border: 1px solid var(--card-border); border-radius: var(--radius-sm); color: var(--text-cool); font-size: 0.92rem; outline: none;"
+            >
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--text-muted)" stroke-width="2" style="position: absolute; left: 0.85rem; top: 0.85rem;">
+              <circle cx="11" cy="11" r="8"></circle>
+              <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+            </svg>
+          </div>
+          <button id="clearSearchBtn" class="btn-secondary" style="padding: 0.75rem 1.2rem; font-size: 0.85rem;">
+            Clear
+          </button>
+          <button id="useMyLocationBtn" class="btn-primary" style="padding: 0.75rem 1.2rem; font-size: 0.85rem;">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <polygon points="3 11 22 2 13 21 11 13 3 11"></polygon>
+            </svg>
+            Use My Location
+          </button>
+          <button id="resetMapBtn" class="btn-secondary" style="padding: 0.75rem 1.2rem; font-size: 0.85rem;">
+            Reset Map
+          </button>
+        </div>
+
+        <!-- Filter Pills & Sorting -->
+        <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 0.75rem;">
+          <div style="display: flex; gap: 0.4rem; flex-wrap: wrap;">
+            <button class="loc-cat-filter-btn active" data-category="all">All Locations</button>
+            <button class="loc-cat-filter-btn" data-category="railway">Railway Stations</button>
+            <button class="loc-cat-filter-btn" data-category="bus-depot">Bus Depots</button>
+            <button class="loc-cat-filter-btn" data-category="bus-terminal">Bus Terminals</button>
+            <button class="loc-cat-filter-btn" data-category="bus-stop">Bus Stops</button>
+            <button class="loc-cat-filter-btn" data-category="monitored">Monitored (Simulated)</button>
+            <button class="loc-cat-filter-btn" data-category="unmonitored">Unmonitored</button>
+          </div>
+
+          <div style="display: flex; align-items: center; gap: 0.5rem;">
+            <span style="font-size: 0.8rem; color: var(--text-secondary);">Sort By:</span>
+            <select id="sortSelect" style="background: rgba(7, 17, 31, 0.85); border: 1px solid var(--card-border); color: var(--text-cool); border-radius: 4px; padding: 0.35rem 0.65rem; font-size: 0.8rem; outline: none;">
+              <option value="name">Name (A–Z)</option>
+              <option value="distance">Distance from Center</option>
+              <option value="occupancy">Occupancy % (High to Low)</option>
+            </select>
+          </div>
+        </div>
+
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 0.75rem; font-size: 0.75rem;">
+          <span id="matchCountDisplay" style="color: var(--cyan-electric); font-weight: 600;">14 transport locations found</span>
+          <span id="geoStatusMsg" style="color: var(--text-muted); font-family: var(--font-mono);"></span>
+        </div>
+
+        <div id="recentSearchesContainer" style="display: flex; align-items: center; gap: 0.4rem; margin-top: 0.5rem; flex-wrap: wrap;"></div>
+      </div>
+
+      <!-- Split-Screen Grid: Results List on Left, Leaflet Map on Right -->
+      <div class="explore-split-grid">
+        <!-- Results Column -->
+        <div class="explore-list-panel" id="locationCardsContainer">
+          <!-- Dynamically populated by JS -->
+        </div>
+
+        <!-- Interactive Map Column -->
+        <div class="map-wrapper">
+          <div id="mumbaiLeafletMap"></div>
+          <div style="position: absolute; bottom: 8px; right: 8px; z-index: 500; background: rgba(7, 17, 31, 0.85); padding: 4px 8px; border-radius: 4px; border: 1px solid var(--card-border); font-size: 10px; color: var(--text-muted);">
+            OpenStreetMap &amp; CARTO Dark Matter Tiles
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- =======================================================================
+         TAB 2: ENTC SENSOR & HARDWARE LAB
+         ======================================================================= -->
+    <div id="tab-entc-lab" class="page-tab-panel">
+      <!-- Section 1: ENTC Tools & Components Explorer -->
+      <div style="margin-bottom: 3rem;">
+        <div style="display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 1.25rem;">
+          <div>
+            <span class="section-tag">PHYSICAL ENGINEERING LAYER</span>
+            <h2 style="font-size: 1.75rem;">ENTC Tools &amp; Components Explorer</h2>
+            <p style="font-size: 0.88rem; color: var(--text-secondary);">
+              The physical optoelectronic sensors, embedded microcontrollers, and communication protocols behind CrowdSense.
+            </p>
+          </div>
+          <span class="badge-demo">CURRICULUM ALIGNED</span>
+        </div>
+
+        <!-- Component Cards Grid -->
+        <div class="comp-grid">
+          <!-- Card 1: IR Obstacle -->
+          <div class="glass-panel comp-card">
+            <div>
+              <span class="badge-demo" style="font-size: 0.65rem;">SENSOR • OPTICAL</span>
+              <h4 style="font-size: 1.1rem; margin: 0.35rem 0; color: var(--cyan-electric);">IR Obstacle Sensor</h4>
+              <p style="font-size: 0.8rem; color: var(--text-secondary); line-height: 1.4; margin-bottom: 1rem;">
+                Detects object presence within 2–30 cm via reflected infrared light and LM393 comparator Schmitt trigger.
+              </p>
+            </div>
+            <button class="btn-outline-cyan" onclick="openComponentDetails('ir-obstacle')" style="width: 100%; justify-content: center; font-size: 0.78rem;">
+              Learn More &rarr;
+            </button>
+          </div>
+
+          <!-- Card 2: Break-Beam IR -->
+          <div class="glass-panel comp-card">
+            <div>
+              <span class="badge-demo" style="font-size: 0.65rem;">SENSOR • LINE-OF-SIGHT</span>
+              <h4 style="font-size: 1.1rem; margin: 0.35rem 0; color: var(--cyan-electric);">Break-Beam IR Pair</h4>
+              <p style="font-size: 0.8rem; color: var(--text-secondary); line-height: 1.4; margin-bottom: 1rem;">
+                Transmitter &amp; photodiode pair up to 2.5m. Sequential dual placement establishes ingress vs egress direction.
+              </p>
+            </div>
+            <button class="btn-outline-cyan" onclick="openComponentDetails('break-beam')" style="width: 100%; justify-content: center; font-size: 0.78rem;">
+              Learn More &rarr;
+            </button>
+          </div>
+
+          <!-- Card 3: HC-SR04 -->
+          <div class="glass-panel comp-card">
+            <div>
+              <span class="badge-demo" style="font-size: 0.65rem;">SENSOR • ACOUSTIC</span>
+              <h4 style="font-size: 1.1rem; margin: 0.35rem 0; color: var(--cyan-electric);">HC-SR04 Ultrasonic</h4>
+              <p style="font-size: 0.8rem; color: var(--text-secondary); line-height: 1.4; margin-bottom: 1rem;">
+                Measures queue distance (2–400 cm) by computing 40 kHz acoustic round-trip echo travel time.
+              </p>
+            </div>
+            <button class="btn-outline-cyan" onclick="openComponentDetails('hc-sr04')" style="width: 100%; justify-content: center; font-size: 0.78rem;">
+              Learn More &rarr;
+            </button>
+          </div>
+
+          <!-- Card 4: PIR Motion -->
+          <div class="glass-panel comp-card">
+            <div>
+              <span class="badge-demo" style="font-size: 0.65rem;">SENSOR • THERMAL</span>
+              <h4 style="font-size: 1.1rem; margin: 0.35rem 0; color: var(--cyan-electric);">PIR Motion Sensor</h4>
+              <p style="font-size: 0.8rem; color: var(--text-secondary); line-height: 1.4; margin-bottom: 1rem;">
+                Detects differential human body heat across Fresnel lens sectors. Area presence without discrete counting.
+              </p>
+            </div>
+            <button class="btn-outline-cyan" onclick="openComponentDetails('pir-motion')" style="width: 100%; justify-content: center; font-size: 0.78rem;">
+              Learn More &rarr;
+            </button>
+          </div>
+
+          <!-- Card 5: ESP32 -->
+          <div class="glass-panel comp-card">
+            <div>
+              <span class="badge-demo" style="font-size: 0.65rem;">MCU • EDGE GATEWAY</span>
+              <h4 style="font-size: 1.1rem; margin: 0.35rem 0; color: var(--blue-neon);">ESP32 DevKit V1</h4>
+              <p style="font-size: 0.8rem; color: var(--text-secondary); line-height: 1.4; margin-bottom: 1rem;">
+                Dual-core 240 MHz MCU with Wi-Fi &amp; BLE. FreeRTOS hardware timer interrupts eliminate CPU polling latency.
+              </p>
+            </div>
+            <button class="btn-outline-cyan" onclick="openComponentDetails('esp32')" style="width: 100%; justify-content: center; font-size: 0.78rem;">
+              Learn More &rarr;
+            </button>
+          </div>
+
+          <!-- Card 6: Arduino Uno -->
+          <div class="glass-panel comp-card">
+            <div>
+              <span class="badge-demo" style="font-size: 0.65rem;">MCU • 8-BIT AVR</span>
+              <h4 style="font-size: 1.1rem; margin: 0.35rem 0; color: var(--blue-neon);">Arduino Uno R3</h4>
+              <p style="font-size: 0.8rem; color: var(--text-secondary); line-height: 1.4; margin-bottom: 1rem;">
+                ATmega328P 16 MHz educational controller for breadboard hardware debugging and signal characterization.
+              </p>
+            </div>
+            <button class="btn-outline-cyan" onclick="openComponentDetails('arduino-uno')" style="width: 100%; justify-content: center; font-size: 0.78rem;">
+              Learn More &rarr;
+            </button>
+          </div>
+
+          <!-- Card 7: MQTT -->
+          <div class="glass-panel comp-card">
+            <div>
+              <span class="badge-demo" style="font-size: 0.65rem;">PROTOCOL • IoT</span>
+              <h4 style="font-size: 1.1rem; margin: 0.35rem 0; color: var(--status-teal);">MQTT Protocol</h4>
+              <p style="font-size: 0.8rem; color: var(--text-secondary); line-height: 1.4; margin-bottom: 1rem;">
+                Lightweight publish/subscribe messaging over TCP/TLS. 2-byte header overhead ideal for power-constrained LPWAN.
+              </p>
+            </div>
+            <button class="btn-outline-cyan" onclick="openComponentDetails('mqtt')" style="width: 100%; justify-content: center; font-size: 0.78rem;">
+              Learn More &rarr;
+            </button>
+          </div>
+
+          <!-- Card 8: Oscilloscope -->
+          <div class="glass-panel comp-card">
+            <div>
+              <span class="badge-demo" style="font-size: 0.65rem;">DIAGNOSTICS • TEST BENCH</span>
+              <h4 style="font-size: 1.1rem; margin: 0.35rem 0; color: var(--status-teal);">Oscilloscope &amp; DMM</h4>
+              <p style="font-size: 0.8rem; color: var(--text-secondary); line-height: 1.4; margin-bottom: 1rem;">
+                Visualizing TTL rise/fall times, verifying power rail ripple, and diagnosing false contact bounce.
+              </p>
+            </div>
+            <button class="btn-outline-cyan" onclick="openComponentDetails('multimeter-scope')" style="width: 100%; justify-content: center; font-size: 0.78rem;">
+              Learn More &rarr;
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Section 2: Virtual Sensor & IoT Telemetry Bench -->
+      <div class="glass-panel" style="padding: 2rem; margin-bottom: 3rem;">
+        <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--card-border); padding-bottom: 1rem; margin-bottom: 1.5rem; flex-wrap: wrap; gap: 0.75rem;">
+          <div>
+            <div class="badge-demo" style="color: var(--cyan-electric); border-color: var(--cyan-electric); margin-bottom: 0.25rem;">
+              SIMULATED HARDWARE TELEMETRY
+            </div>
+            <h3 style="font-size: 1.35rem;">Virtual Dual-Beam Ingress/Egress Bench</h3>
+            <span style="font-size: 0.82rem; color: var(--text-secondary);">
+              Current Station Context: <strong id="labActiveStationLabel" style="color: var(--text-cool);">CSMT (ESP32_CSMT_GATE_01)</strong>
+            </span>
+          </div>
+          <div class="mono" style="font-size: 0.78rem; color: var(--status-teal);">
+            ESP32: ONLINE | MQTT: CONNECTED | SYNC: <span id="labLastSyncTime">--:--:--</span>
+          </div>
+        </div>
+
+        <div id="labFaultBanner" style="display: none; background: rgba(255,82,82,0.12); border: 1px solid var(--status-coral); color: var(--status-coral); padding: 0.75rem 1rem; border-radius: 6px; font-size: 0.85rem; margin-bottom: 1.25rem; font-weight: 600;">
+          ⚠️ HARDWARE WARNING: Sensor fault active.
+        </div>
+
+        <!-- Telemetry Gauges Grid -->
+        <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem; margin-bottom: 1.75rem;">
+          <div style="background: rgba(7, 17, 31, 0.6); padding: 1rem; border-radius: 8px; border: 1px solid var(--card-border); text-align: center;">
+            <div style="font-size: 0.72rem; color: var(--text-secondary);">Sensor 1 (Beam A)</div>
+            <div id="labSensor1Status" class="status-pill status-teal" style="margin-top: 0.5rem; display: inline-block;">BEAM CLEAR (HIGH)</div>
+          </div>
+          <div style="background: rgba(7, 17, 31, 0.6); padding: 1rem; border-radius: 8px; border: 1px solid var(--card-border); text-align: center;">
+            <div style="font-size: 0.72rem; color: var(--text-secondary);">Sensor 2 (Beam B)</div>
+            <div id="labSensor2Status" class="status-pill status-teal" style="margin-top: 0.5rem; display: inline-block;">BEAM CLEAR (HIGH)</div>
+          </div>
+          <div style="background: rgba(7, 17, 31, 0.6); padding: 1rem; border-radius: 8px; border: 1px solid var(--card-border); text-align: center;">
+            <div style="font-size: 0.72rem; color: var(--text-secondary);">Queue Depth (Ultrasonic)</div>
+            <strong id="labUltrasonicVal" style="font-size: 1.25rem; color: var(--cyan-electric); font-family: var(--font-mono); display: block; margin-top: 0.25rem;">142.5 cm</strong>
+          </div>
+          <div style="background: rgba(7, 17, 31, 0.6); padding: 1rem; border-radius: 8px; border: 1px solid var(--card-border); text-align: center;">
+            <div style="font-size: 0.72rem; color: var(--text-secondary);">Crowd Flow Condition</div>
+            <div id="labCrowdStatusBadge" class="status-pill status-teal" style="margin-top: 0.5rem; display: inline-block;">OPTIMAL FLOW</div>
+          </div>
+        </div>
+
+        <!-- Counts and Occupancy Meter -->
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; margin-bottom: 1.75rem;">
+          <!-- Counts Grid -->
+          <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.75rem; background: rgba(7, 17, 31, 0.7); padding: 1.25rem; border-radius: 8px; border: 1px solid var(--card-border); text-align: center;">
+            <div>
+              <div style="font-size: 0.75rem; color: var(--text-secondary)">Total In (&lambda;)</div>
+              <strong id="labInVal" style="font-size: 1.6rem; color: var(--status-teal); font-family: var(--font-mono);">387</strong>
+            </div>
+            <div>
+              <div style="font-size: 0.75rem; color: var(--text-secondary)">Total Out (&mu;)</div>
+              <strong id="labOutVal" style="font-size: 1.6rem; color: var(--blue-neon); font-family: var(--font-mono);">320</strong>
+            </div>
+            <div>
+              <div style="font-size: 0.75rem; color: var(--text-secondary)">People Inside (L)</div>
+              <strong id="labInsideVal" style="font-size: 1.6rem; color: var(--cyan-electric); font-family: var(--font-mono);">67</strong>
+            </div>
+          </div>
+
+          <!-- Occupancy Meter -->
+          <div style="background: rgba(7, 17, 31, 0.7); padding: 1.25rem; border-radius: 8px; border: 1px solid var(--card-border); display: flex; flex-direction: column; justify-content: center;">
+            <div style="display: flex; justify-content: space-between; font-size: 0.85rem; margin-bottom: 0.5rem;">
+              <span>Concourse Occupancy</span>
+              <strong id="labOccPercentVal" style="font-family: var(--font-mono); color: var(--cyan-electric);">15%</strong>
+            </div>
+            <div class="progress-track" style="height: 10px;">
+              <div id="labOccBarFill" class="progress-fill fill-teal" style="width: 15%;"></div>
+            </div>
+            <div style="display: flex; justify-content: space-between; font-size: 0.7rem; color: var(--text-muted); margin-top: 0.4rem;">
+              <span>Formula: Occupants ÷ Capacity × 100</span>
+              <span>Warn: 70% | Crit: 85%</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Simulation Action Buttons -->
+        <div style="display: flex; gap: 0.75rem; flex-wrap: wrap; margin-bottom: 1.5rem;">
+          <button id="btnSimEntry" class="btn-primary" style="flex: 1; padding: 0.75rem; font-size: 0.85rem;">
+            + Simulate Ingress (Beam A &rarr; Beam B)
+          </button>
+          <button id="btnSimExit" class="btn-secondary" style="flex: 1; padding: 0.75rem; font-size: 0.85rem;">
+            - Simulate Egress (Beam B &rarr; Beam A)
+          </button>
+          <button id="btnToggleSensor1" class="btn-secondary" style="font-size: 0.8rem; padding: 0.75rem;">
+            Disable Beam A
+          </button>
+          <button id="btnToggleSensor2" class="btn-secondary" style="font-size: 0.8rem; padding: 0.75rem;">
+            Disable Beam B
+          </button>
+          <button id="btnGenerateFault" class="btn-secondary" style="font-size: 0.8rem; padding: 0.75rem; color: var(--status-coral); border-color: rgba(255,82,82,0.3);">
+            Generate Sensor Fault
+          </button>
+          <button id="btnClearFault" class="btn-secondary" style="font-size: 0.8rem; padding: 0.75rem; color: var(--status-teal);">
+            Clear Fault
+          </button>
+          <button id="btnResetLab" class="btn-secondary" style="font-size: 0.8rem; padding: 0.75rem;">
+            Reset Counters
+          </button>
+        </div>
+
+        <!-- Configuration Inputs -->
+        <div style="background: rgba(0,0,0,0.3); border: 1px solid var(--card-border); border-radius: 8px; padding: 1rem; display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; margin-bottom: 1.5rem;">
+          <div>
+            <label style="font-size: 0.75rem; color: var(--text-secondary); display: block; margin-bottom: 0.25rem;">Max Zone Capacity (N)</label>
+            <input type="number" id="cfgCapacity" value="450" min="10" max="2000" style="width: 100%; padding: 0.4rem 0.6rem; background: rgba(7,17,31,0.8); border: 1px solid var(--card-border); color: var(--text-cool); border-radius: 4px; font-family: var(--font-mono);">
+          </div>
+          <div>
+            <label style="font-size: 0.75rem; color: var(--text-secondary); display: block; margin-bottom: 0.25rem;">Warning Limit (%)</label>
+            <input type="number" id="cfgWarnThreshold" value="70" min="20" max="95" style="width: 100%; padding: 0.4rem 0.6rem; background: rgba(7,17,31,0.8); border: 1px solid var(--card-border); color: var(--text-cool); border-radius: 4px; font-family: var(--font-mono);">
+          </div>
+          <div>
+            <label style="font-size: 0.75rem; color: var(--text-secondary); display: block; margin-bottom: 0.25rem;">Critical Limit (%)</label>
+            <input type="number" id="cfgCritThreshold" value="85" min="30" max="100" style="width: 100%; padding: 0.4rem 0.6rem; background: rgba(7,17,31,0.8); border: 1px solid var(--card-border); color: var(--text-cool); border-radius: 4px; font-family: var(--font-mono);">
+          </div>
+        </div>
+
+        <!-- Real-Time Alert Log -->
+        <div>
+          <div style="font-size: 0.8rem; font-weight: 700; color: var(--text-secondary); margin-bottom: 0.5rem;">
+            HARDWARE &amp; THRESHOLD EVENT LOG
+          </div>
+          <div id="labAlertHistory" style="max-height: 140px; overflow-y: auto;">
+            <div style="font-family: 'JetBrains Mono', monospace; font-size: 0.72rem; padding: 0.35rem 0.5rem; background: rgba(7,17,31,0.6); border-left: 2px solid var(--cyan-electric); margin-bottom: 0.35rem;">
+              [SYSTEM] Telemetry engine initialized. Monitoring simulated ESP32 port.
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Section 3: Signal Processing, Debouncing & Digital Waveform Viewer -->
+      <div class="glass-panel" style="padding: 2rem;">
+        <span class="section-tag">SIGNAL PROCESSING &amp; MEASUREMENT</span>
+        <h3 style="font-size: 1.45rem; margin: 0.35rem 0 0.5rem 0;">From Physical Photons to Digital Logic</h3>
+        <p style="font-size: 0.88rem; color: var(--text-secondary); margin-bottom: 1.5rem;">
+          How raw optical transitions are debounced, ordered, and converted to discrete passage data by the microcontroller.
+        </p>
+
+        <!-- Oscilloscope Waveform Viewer -->
+        <div class="scope-screen" style="margin-bottom: 1.5rem;">
+          <div style="display: flex; justify-content: space-between; font-size: 0.75rem; margin-bottom: 0.5rem;">
+            <span style="color: var(--cyan-electric);">CH1: GPIO 18 (Beam A) [TTL 3.3V]</span>
+            <span style="color: var(--blue-neon);">CH2: GPIO 19 (Beam B) [TTL 3.3V]</span>
+            <span class="badge-demo" style="font-size: 0.65rem;">TIMEBASE: 50ms/DIV</span>
+          </div>
+
+          <canvas id="digitalWaveformCanvas" width="800" height="100" style="width: 100%; height: 100px; display: block;"></canvas>
+
+          <div style="display: flex; justify-content: space-between; font-size: 0.7rem; color: var(--text-muted); margin-top: 0.5rem;">
+            <span>ACTIVE-LOW INTERRUPTS: High = 3.3V (Clear), Low = 0V (Obstructed)</span>
+            <strong style="color: #FFAB00;">SIMULATED WAVEFORM — NOT A PHYSICAL OSCILLOSCOPE READING</strong>
+          </div>
+        </div>
+
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem;">
+          <!-- Signal Explanations -->
+          <div style="background: rgba(7,17,31,0.6); padding: 1.25rem; border-radius: 8px; border: 1px solid var(--card-border);">
+            <h4 style="font-size: 0.95rem; color: var(--cyan-electric); margin-bottom: 0.5rem;">Direction Detection State Machine</h4>
+            <p style="font-size: 0.8rem; color: var(--text-secondary); line-height: 1.5; margin-bottom: 0.75rem;">
+              Sequential activation orders resolve commuter direction:
+            </p>
+            <ul style="font-size: 0.78rem; color: var(--text-cool); list-style: none; display: flex; flex-direction: column; gap: 0.35rem;">
+              <li><strong style="color: var(--status-teal);">Ingress:</strong> State 0 (Idle) &rarr; State 1 (A Low, B High) &rarr; State 2 (Both Low) &rarr; State 3 (A High, B Low) &rarr; Increment In.</li>
+              <li><strong style="color: var(--blue-neon);">Egress:</strong> State 0 (Idle) &rarr; State 1 (B Low, A High) &rarr; State 2 (Both Low) &rarr; State 3 (B High, A Low) &rarr; Increment Out.</li>
+            </ul>
+          </div>
+
+          <!-- Debouncing and Ultrasonic Math -->
+          <div style="background: rgba(7,17,31,0.6); padding: 1.25rem; border-radius: 8px; border: 1px solid var(--card-border);">
+            <h4 style="font-size: 0.95rem; color: var(--cyan-electric); margin-bottom: 0.5rem;">Debouncing &amp; Ultrasonic Physics</h4>
+            <p style="font-size: 0.8rem; color: var(--text-secondary); line-height: 1.5; margin-bottom: 0.5rem;">
+              <strong>Software Debounce (50ms):</strong> Suppresses rapid false trigger pulses caused by bag handles or arm swings.
+            </p>
+            <p style="font-size: 0.8rem; color: var(--text-secondary); line-height: 1.5;">
+              <strong>Acoustic Calculation:</strong> Distance \(d = \frac{\Delta t \times 343\,\text{m/s}}{2}\). A roundtrip echo of \(830\,\mu\text{s}\) corresponds to \(14.2\,\text{cm}\).
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- =======================================================================
+         TAB 3: CROWD INTELLIGENCE & SYSTEM ARCHITECTURE
+         ======================================================================= -->
+    <div id="tab-crowd-intelligence" class="page-tab-panel">
+      <!-- Selected Location Crowd Intelligence Banner -->
+      <div class="glass-panel" style="padding: 2rem; margin-bottom: 2.5rem;">
+        <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 1.25rem; flex-wrap: wrap; gap: 1rem;">
+          <div>
+            <span class="badge-demo">SELECTED TRANSPORT LOCATION</span>
+            <h2 id="intelLocationName" style="font-size: 2rem; margin-top: 0.35rem; color: var(--text-cool);">
+              Chhatrapati Shivaji Maharaj Terminus (CSMT)
+            </h2>
+            <p id="intelCategory" style="font-size: 0.88rem; color: var(--text-secondary);">
+              Railway Station • Fort, South Mumbai
+            </p>
+            <div id="intelCoords" class="mono" style="font-size: 0.78rem; color: var(--text-muted); margin-top: 0.25rem;">
+              18.9398° N, 72.8355° E
+            </div>
+          </div>
+
+          <div style="text-align: right;">
+            <div style="font-size: 0.75rem; color: var(--text-secondary); margin-bottom: 0.25rem;">LINKED GATEWAY</div>
+            <div id="intelDeviceId" class="mono" style="font-size: 0.85rem; color: var(--cyan-electric);">
+              ESP32_CSMT_GATE_01
+            </div>
+          </div>
+        </div>
+
+        <!-- 3 Monitoring States Banner -->
+        <div id="intelStatusBanner" class="monitoring-status-banner status-simulated">
+          <span class="sensor-dot"></span>
+          <strong>DATA SOURCE: SIMULATED HARDWARE TELEMETRY</strong>
+          <span>ESP32 Virtual Gate active</span>
+        </div>
+
+        <!-- Metric Details Grid -->
+        <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; margin-bottom: 1.75rem;">
+          <div style="background: rgba(7, 17, 31, 0.6); padding: 1.25rem; border-radius: 8px; border: 1px solid var(--card-border); text-align: center;">
+            <div style="font-size: 0.78rem; color: var(--text-secondary);">Concourse Occupancy</div>
+            <strong id="intelOccupancyGauge" style="font-size: 2.2rem; color: var(--cyan-electric); font-family: var(--font-mono); display: block; margin: 0.25rem 0;">86%</strong>
+            <div id="intelCrowdLevelBadge" class="status-pill status-coral" style="display: inline-block;">High Crowd Alert</div>
+          </div>
+
+          <div style="background: rgba(7, 17, 31, 0.6); padding: 1.25rem; border-radius: 8px; border: 1px solid var(--card-border); text-align: center;">
+            <div style="font-size: 0.78rem; color: var(--text-secondary);">Estimated Wait Time</div>
+            <strong id="intelWaitTime" style="font-size: 2.2rem; color: var(--text-cool); font-family: var(--font-mono); display: block; margin: 0.25rem 0;">16 min</strong>
+            <div style="font-size: 0.72rem; color: var(--text-muted);">Calculated via Little's Law (W = L / &lambda;)</div>
+          </div>
+
+          <div style="background: rgba(7, 17, 31, 0.6); padding: 1.25rem; border-radius: 8px; border: 1px solid var(--card-border); text-align: center;">
+            <div style="font-size: 0.78rem; color: var(--text-secondary);">Sensor Health &amp; Ping</div>
+            <strong style="font-size: 1.35rem; color: var(--status-teal); font-family: var(--font-mono); display: block; margin: 0.6rem 0;">99.4% OPTICAL</strong>
+            <div style="font-size: 0.72rem; color: var(--text-muted);">RSSI: -64 dBm | Jitter &lt; 8ms</div>
+          </div>
+        </div>
+
+        <!-- Alternative Nearby Transport Options -->
+        <div style="background: rgba(0, 229, 255, 0.05); border-left: 3px solid var(--cyan-electric); padding: 1rem 1.25rem; border-radius: 4px;">
+          <strong style="font-size: 0.88rem; color: var(--cyan-electric); display: block; margin-bottom: 0.5rem;">
+            Alternative Less-Crowded Hubs (Simulated Illustrative Advice):
+          </strong>
+          <ul id="intelAlternativesList" style="list-style: none; padding-left: 0;">
+            <!-- Populated dynamically -->
+          </ul>
+        </div>
+      </div>
+
+      <!-- System Architecture Interactive Visualization -->
+      <div class="glass-panel" style="padding: 2rem;">
+        <div style="display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 1.5rem;">
+          <div>
+            <span class="section-tag">ENTC END-TO-END PIPELINE</span>
+            <h3 style="font-size: 1.45rem;">Interactive System Architecture</h3>
+            <p style="font-size: 0.85rem; color: var(--text-secondary);">
+              Click any architecture node to inspect its electronic transduction, embedded firmware, or telecommunications role.
+            </p>
+          </div>
+          <span class="badge-demo">CLICK NODE TO INSPECT</span>
+        </div>
+
+        <!-- Node Chain Diagram -->
+        <div class="arch-flow-diagram">
+          <div class="arch-node-box active" data-arch-key="passengers">
+            <div style="font-size: 1.4rem;">🚶</div>
+            <strong style="font-size: 0.78rem; color: var(--text-cool); display: block;">Passengers</strong>
+            <span style="font-size: 0.68rem; color: var(--text-muted)">Physical Entity</span>
+          </div>
+
+          <div class="arch-arrow">&rarr;</div>
+
+          <div class="arch-node-box" data-arch-key="sensors">
+            <div style="font-size: 1.4rem;">📡</div>
+            <strong style="font-size: 0.78rem; color: var(--cyan-electric); display: block;">IR Sensors</strong>
+            <span style="font-size: 0.68rem; color: var(--text-muted)">Optoelectronics</span>
+          </div>
+
+          <div class="arch-arrow">&rarr;</div>
+
+          <div class="arch-node-box" data-arch-key="mcu">
+            <div style="font-size: 1.4rem;">⚡</div>
+            <strong style="font-size: 0.78rem; color: var(--blue-neon); display: block;">ESP32 MCU</strong>
+            <span style="font-size: 0.68rem; color: var(--text-muted)">Edge Processing</span>
+          </div>
+
+          <div class="arch-arrow">&rarr;</div>
+
+          <div class="arch-node-box" data-arch-key="network">
+            <div style="font-size: 1.4rem;">📶</div>
+            <strong style="font-size: 0.78rem; color: var(--status-teal); display: block;">Wi-Fi / MQTT</strong>
+            <span style="font-size: 0.68rem; color: var(--text-muted)">RF Telemetry</span>
+          </div>
+
+          <div class="arch-arrow">&rarr;</div>
+
+          <div class="arch-node-box" data-arch-key="backend">
+            <div style="font-size: 1.4rem;">🗄️</div>
+            <strong style="font-size: 0.78rem; color: var(--status-amber); display: block;">Backend API</strong>
+            <span style="font-size: 0.68rem; color: var(--text-muted)">Time-Series DB</span>
+          </div>
+
+          <div class="arch-arrow">&rarr;</div>
+
+          <div class="arch-node-box" data-arch-key="ui">
+            <div style="font-size: 1.4rem;">💻</div>
+            <strong style="font-size: 0.78rem; color: var(--cyan-electric); display: block;">Web Dashboard</strong>
+            <span style="font-size: 0.68rem; color: var(--text-muted)">Presentation Layer</span>
+          </div>
+        </div>
+
+        <!-- Node Inspection Box -->
+        <div style="background: rgba(7, 17, 31, 0.7); border: 1px solid var(--card-border); border-radius: 8px; padding: 1.5rem;">
+          <h4 id="archInfoTitle" style="font-size: 1.15rem; color: var(--cyan-electric); margin-bottom: 0.5rem;">
+            Physical Layer: Commuters &amp; Pedestrians
+          </h4>
+          <p id="archInfoDesc" style="font-size: 0.88rem; color: var(--text-secondary); line-height: 1.6; margin-bottom: 0.75rem;">
+            Commuters enter and exit transit concourses through designated gates, creating physical optical obstruction events.
+          </p>
+          <div class="mono" style="font-size: 0.75rem; color: #a4c8ff; background: rgba(57,135,255,0.08); padding: 0.5rem 0.75rem; border-radius: 4px;">
+            TECHNICAL PRINCIPLE: <span id="infoTechDetail">Physical entity detection via line-of-sight interruption.</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- =========================================================================
+       Component Detail Modal
+       ========================================================================= -->
+  <div id="componentDetailModal" class="modal-overlay" role="dialog" aria-modal="true">
+    <div class="modal-content">
+      <button id="closeCompModal" class="modal-close-btn">&times;</button>
+      
+      <span id="compModalCategory" class="badge-demo" style="margin-bottom: 0.4rem; display: inline-block;">Category</span>
+      <h3 id="compModalTitle" style="font-size: 1.4rem; margin-bottom: 1rem; color: var(--text-cool);">Component Details</h3>
+
+      <div style="display: flex; flex-direction: column; gap: 0.85rem; font-size: 0.85rem;">
+        <div>
+          <strong style="color: var(--cyan-electric); display: block;">What it Detects:</strong>
+          <span id="compModalDetects" style="color: var(--text-secondary);">--</span>
+        </div>
+        <div>
+          <strong style="color: var(--cyan-electric); display: block;">Input &amp; Output Specifications:</strong>
+          <span id="compModalIO" style="color: var(--text-secondary);">--</span>
+        </div>
+        <div>
+          <strong style="color: var(--cyan-electric); display: block;">Role in CrowdSense Architecture:</strong>
+          <span id="compModalRole" style="color: var(--text-secondary);">--</span>
+        </div>
+        <div>
+          <strong style="color: var(--status-coral); display: block;">Engineering Limitations:</strong>
+          <span id="compModalLimits" style="color: var(--text-secondary);">--</span>
+        </div>
+        <div>
+          <strong style="color: var(--status-teal); display: block;">How to Demonstrate &amp; Test:</strong>
+          <span id="compModalDemo" style="color: var(--text-secondary);">--</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="site-footer" style="padding: 3rem 0 2rem 0; margin-top: 4rem;">
+    <div class="container" style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem;">
+      <div>
+        <strong style="color: var(--text-cool);">CrowdSense — Explore &amp; Monitor</strong>
+        <p style="font-size: 0.8rem; color: var(--text-secondary); margin-top: 0.2rem;">
+          CHAKRAVYUH ENTC AI Vibe Coding Challenge • Educational Prototype
+        </p>
+      </div>
+      <div class="mono" style="font-size: 0.78rem; color: var(--cyan-electric);">
+        GEOGRAPHIC DATA: OPENSTREETMAP | SIMULATED TELEMETRY
+      </div>
+    </div>
+  </footer>
+
+  <!-- Leaflet Map JS -->
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+  
+  <!-- Mumbai Dataset & Controller Scripts -->
+  <script src="js/mumbai-locations.js"></script>
+  <script src="js/explore-monitor.js"></script>
+</body>
+</html>
+

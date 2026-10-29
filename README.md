@@ -57,3 +57,43 @@ Then visit `http://localhost:3000`.
 
 ---
 *Note: All sensor readings and traffic levels are clearly marked as DEMO DATA / Simulated Data for educational and prototype demonstration purposes.*
+
+
+---
+
+## 🗺️ New Integrated Module: Explore & Monitor (`explore-monitor.html`)
+The new integrated **Explore & Monitor** page brings together real geographic search and interactive ENTC electronics:
+1. **Smart Location Finder & Mumbai Transport Map:**
+   - Real geographic coordinates for major Mumbai transit hubs (CSMT, Mumbai Central, Dadar, Bandra Terminus, Andheri, LTT Kurla, Churchgate, Borivali, Wadala BEST Depot, etc.).
+   - Interactive Leaflet.js map with custom high-tech glowing map pins.
+   - Geolocation search via browser API (`Use My Location`), sorting by Haversine distance, and OpenStreetMap attribution.
+2. **ENTC Component Explorer:**
+   - Detailed interactive cards and specs for optical sensors, acoustic transducers, microcontrollers (ESP32/Arduino), MQTT networking, and test bench tools.
+3. **Sensor & IoT Lab Simulation:**
+   - Sequential optical beam break direction testing (A &rarr; B = Ingress, B &rarr; A = Egress).
+   - Fault injection and recovery (optical saturation, disabled beams).
+   - Live canvas digital waveform trace labeled: *SIMULATED WAVEFORM — NOT A PHYSICAL OSCILLOSCOPE READING*.
+4. **Crowd Intelligence & System Architecture:**
+   - Clear distinction between *LIVE HARDWARE DATA*, *SIMULATED DATA*, and *NOT MONITORED* stations.
+   - Interactive 6-node ENTC architecture visualization.
+
+
+---
+
+## 🇮🇳 India-Wide Smart Crowd, Traffic & Visit Planner (`visit-planner.html`)
+The **Smart Visit Planner** expands CrowdSense to a pan-India scope covering major cities including **Pune, Mumbai, New Delhi, Bengaluru, Hyderabad, Chennai, and Jaipur**:
+1. **Pan-India Geographic Search:**
+   - Real geographic coordinates for hospitals, railway/metro stations, bus terminals, restaurants, malls, and major traffic junctions.
+   - Nominatim OpenStreetMap live geocoding integration (`searchNominatimOpenStreetMap`) with strict rate-limiting compliance, CORS error handling, and verified offline dataset fallback.
+2. **Category-Specific Deterministic Simulation Engine:**
+   - Evaluates weekday vs weekend footfall curves using Little's Law ($L = \lambda W$) and category-specific arrival patterns.
+   - 8 Time Slots: 6–8 AM, 8–10 AM, 10 AM–12 PM, 12–2 PM, 2–4 PM, 4–6 PM, 6–8 PM, 8–10 PM.
+   - Highlights **Potentially Quieter Periods** to help commuters, patients, and shoppers plan safer visits.
+3. **Healthcare & Civic Safeguards:**
+   - Explicit clinical notice: Crowd metrics represent physical waiting room density only; never delay urgent medical triage or emergency care to avoid crowds.
+   - Official direct appointment links (e.g. AIIMS ORS.gov.in portal, Ruby Hall Clinic, Apollo Hospital).
+4. **Road Traffic & Signal Corridor Feed:**
+   - Separate pedestrian crowds from vehicle traffic.
+   - Displays vehicle density, average vehicle speed (km/h), and traffic signal phase timing for famous junctions (Central Silk Board Bengaluru, Dhaula Kuan Delhi, Swargate Pune, Western Express Highway Mumbai).
+5. **Clear Data Modes:**
+   - Toggle between **Demo Simulation Mode** (labeled *SIMULATED DEMO DATA — NOT LIVE*) and **Real Hardware Only Mode** (displays *Crowd history unavailable. No verified IoT sensor hardware connected.* for unequipped places).
