@@ -1,0 +1,1171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="CrowdSense — Smart Queue & Crowd Management System for CHAKRAVYUH ENTC AI Vibe Coding Challenge. Less Waiting. Smarter Spaces.">
+  <title>CrowdSense — Smart Queue & Crowd Management System | CHAKRAVYUH ENTC</title>
+  
+  <!-- Google Fonts: Inter & JetBrains Mono -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+  
+  <!-- Custom Futuristic Design System -->
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+
+  <!-- =========================================================================
+       2. NAVBAR
+       ========================================================================= -->
+  <header class="site-header">
+    <div class="container nav-container">
+      <a href="index.html" class="nav-brand" aria-label="CrowdSense Home">
+        <div class="nav-logo-icon">
+          <!-- Animated Sensor-Wave Icon -->
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color: var(--cyan-electric)">
+            <path d="M2 12h2a8 8 0 0 1 16 0h2"></path>
+            <path d="M6 12h2a4 4 0 0 1 8 0h2"></path>
+            <circle cx="12" cy="12" r="1.5" fill="var(--cyan-electric)"></circle>
+          </svg>
+        </div>
+        <span>Crowd<span style="color: var(--cyan-electric)">Sense</span></span>
+      </a>
+
+      <!-- Desktop Nav Links -->
+      <nav aria-label="Primary Navigation">
+        <ul class="nav-links">
+          <li><a href="#hero" class="nav-link active">Home</a></li>
+          <li><a href="#locations" class="nav-link">Explore Locations</a></li>
+          <li><a href="#simulator" class="nav-link">Crowd Simulator</a></li>
+          <li><a href="#sensor-lab" class="nav-link">Sensor &amp; IoT Lab</a></li>
+          <li><a href="#learn" class="nav-link">Learn</a></li>
+        </ul>
+      </nav>
+
+      <!-- Desktop Action Button -->
+      <div class="nav-actions">
+        <a href="dashboard.html" class="btn-primary">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <rect width="7" height="9" x="3" y="3" rx="1"></rect>
+            <rect width="7" height="5" x="14" y="3" rx="1"></rect>
+            <rect width="7" height="9" x="14" y="12" rx="1"></rect>
+            <rect width="7" height="5" x="3" y="16" rx="1"></rect>
+          </svg>
+          Open Dashboard
+        </a>
+        <button id="mobileToggle" class="mobile-toggle" aria-label="Toggle navigation menu" aria-expanded="false">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="4" x2="20" y1="12" y2="12"></line>
+            <line x1="4" x2="20" y1="6" y2="6"></line>
+            <line x1="4" x2="20" y1="18" y2="18"></line>
+          </svg>
+        </button>
+      </div>
+    </div>
+
+    <!-- Mobile Navigation Drawer -->
+    <div id="mobileNav" class="mobile-nav">
+      <a href="#hero" class="nav-link">Home</a>
+      <a href="#locations" class="nav-link">Explore Locations</a>
+      <a href="#simulator" class="nav-link">Crowd Simulator</a>
+      <a href="#sensor-lab" class="nav-link">Sensor &amp; IoT Lab</a>
+      <a href="#learn" class="nav-link">Learn</a>
+      <a href="dashboard.html" class="btn-primary" style="margin-top: 0.5rem; text-align: center;">
+        Open Dashboard
+      </a>
+    </div>
+  </header>
+
+  <main>
+    <!-- =========================================================================
+         3. HERO SECTION
+         ========================================================================= -->
+    <section id="hero" class="hero-section">
+      <div class="container hero-grid">
+        <!-- Hero Left Column -->
+        <div class="hero-content">
+          <div class="badge-tech">
+            <span class="sensor-dot"></span>
+            ENTC • IoT • SMART CITY
+          </div>
+
+          <h1 class="hero-heading">
+            Less Waiting.<br>
+            <span class="text-gradient">Smarter Spaces.</span><br>
+            Better Decisions.
+          </h1>
+
+          <p class="hero-desc">
+            Understand crowd levels, compare estimated waiting times, and discover how electronic sensors and IoT technology can make public spaces smarter.
+          </p>
+
+          <div class="hero-buttons">
+            <a href="#locations" class="btn-primary">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="12" cy="12" r="10"></circle>
+                <polygon points="12 8 8 12 12 16 12 8"></polygon>
+                <line x1="16" y1="12" x2="8" y2="12"></line>
+              </svg>
+              Explore Crowd Levels
+            </a>
+            <a href="#simulator" class="btn-secondary">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color: var(--cyan-electric)">
+                <polygon points="5 3 19 12 5 21 5 3"></polygon>
+              </svg>
+              Try the Simulator
+            </a>
+          </div>
+
+          <div class="hero-footnote">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="12" cy="12" r="10"></circle>
+              <line x1="12" y1="16" x2="12" y2="12"></line>
+              <line x1="12" y1="8" x2="12.01" y2="8"></line>
+            </svg>
+            Interactive prototype | Simulated data
+          </div>
+        </div>
+
+        <!-- Hero Right Column: Futuristic Smart-City & Sensor Graphic -->
+        <div class="hero-graphic-wrap">
+          <!-- Stylized Futuristic Vector Map -->
+          <svg class="city-svg-container" viewBox="0 0 540 500" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <linearGradient id="gridGrad" x1="0" y1="0" x2="1" y2="1">
+                <stop offset="0%" stop-color="#00E5FF" stop-opacity="0.25"/>
+                <stop offset="100%" stop-color="#3987FF" stop-opacity="0.05"/>
+              </linearGradient>
+              <filter id="glowFilter" x="-20%" y="-20%" width="140%" height="140%">
+                <feGaussianBlur stdDeviation="4" result="blur" />
+                <feComposite in="SourceGraphic" in2="blur" operator="over" />
+              </filter>
+            </defs>
+
+            <!-- Grid Mesh Background -->
+            <path d="M40 80 H500 M40 160 H500 M40 240 H500 M40 320 H500 M40 400 H500" stroke="rgba(0, 229, 255, 0.08)" stroke-width="1" />
+            <path d="M100 40 V460 M200 40 V460 M300 40 V460 M400 40 V460 M480 40 V460" stroke="rgba(0, 229, 255, 0.08)" stroke-width="1" />
+
+            <!-- Connecting IoT Telemetry Routes -->
+            <path class="map-route-line" d="M110 120 L270 180 L420 140 L380 340 L160 380 Z" />
+            <path class="map-active-line" d="M110 120 L270 180 L420 140 L380 340 L160 380 Z" />
+            <line x1="270" y1="180" x2="380" y2="340" stroke="rgba(0,229,255,0.3)" stroke-width="1.5" stroke-dasharray="3,3" />
+
+            <!-- Sensor Node 1: College Canteen -->
+            <circle cx="110" cy="120" r="16" fill="rgba(255,82,82,0.18)" stroke="#FF5252" stroke-width="2" filter="url(#glowFilter)" />
+            <circle cx="110" cy="120" r="6" fill="#FF5252" />
+            
+            <!-- Sensor Node 2: Hospital Reception -->
+            <circle cx="420" cy="140" r="16" fill="rgba(0,245,160,0.18)" stroke="#00F5A0" stroke-width="2" filter="url(#glowFilter)" />
+            <circle cx="420" cy="140" r="6" fill="#00F5A0" />
+
+            <!-- Sensor Node 3: Central Bus Stop -->
+            <circle cx="160" cy="380" r="16" fill="rgba(255,171,0,0.18)" stroke="#FFAB00" stroke-width="2" filter="url(#glowFilter)" />
+            <circle cx="160" cy="380" r="6" fill="#FFAB00" />
+
+            <!-- Sensor Node 4: Ticket Counter -->
+            <circle cx="380" cy="340" r="16" fill="rgba(0,245,160,0.18)" stroke="#00F5A0" stroke-width="2" filter="url(#glowFilter)" />
+            <circle cx="380" cy="340" r="6" fill="#00F5A0" />
+
+            <!-- Central IoT Gateway / Microcontroller Node -->
+            <circle cx="270" cy="180" r="22" fill="rgba(0,229,255,0.15)" stroke="var(--cyan-electric)" stroke-width="2" />
+            <circle cx="270" cy="180" r="8" fill="var(--cyan-electric)" />
+            <text x="270" y="215" text-anchor="middle" fill="var(--cyan-electric)" font-size="10" font-family="'JetBrains Mono', monospace">HUB: ESP32</text>
+          </svg>
+
+          <!-- Floating Info Cards -->
+          <!-- Card 1: College Canteen -->
+          <div class="hero-float-card card-canteen" onclick="showHeroLocationDetails('canteen')" title="Click for telemetry details">
+            <div class="float-card-title">
+              <span>College Canteen</span>
+              <span class="status-pill status-coral">84% Full</span>
+            </div>
+            <div class="float-card-metric">
+              <span>⏱ Wait: 18 min</span>
+              <span style="color: var(--status-coral)">High Crowd</span>
+            </div>
+          </div>
+
+          <!-- Card 2: Hospital Reception -->
+          <div class="hero-float-card card-hospital" onclick="showHeroLocationDetails('hospital')" title="Click for telemetry details">
+            <div class="float-card-title">
+              <span>Hospital Reception</span>
+              <span class="status-pill status-teal">38% Low</span>
+            </div>
+            <div class="float-card-metric">
+              <span>⏱ Wait: 6 min</span>
+              <span style="color: var(--status-teal)">Fast Triage</span>
+            </div>
+          </div>
+
+          <!-- Card 3: Central Bus Stop -->
+          <div class="hero-float-card card-bus" onclick="showHeroLocationDetails('bus-stop')" title="Click for telemetry details">
+            <div class="float-card-title">
+              <span>Central Bus Stop</span>
+              <span class="status-pill status-amber">62% Mod</span>
+            </div>
+            <div class="float-card-metric">
+              <span>⏱ Wait: 11 min</span>
+              <span style="color: var(--status-amber)">Next: 4 min</span>
+            </div>
+          </div>
+
+          <!-- Card 4: Ticket Counter -->
+          <div class="hero-float-card card-ticket" onclick="showHeroLocationDetails('ticket-counter')" title="Click for telemetry details">
+            <div class="float-card-title">
+              <span>Ticket Counter</span>
+              <span class="status-pill status-teal">25% Low</span>
+            </div>
+            <div class="float-card-metric">
+              <span>⏱ Wait: 4 min</span>
+              <span style="color: var(--status-teal)">Zero Queue</span>
+            </div>
+          </div>
+
+          <!-- Real-Time Telemetry Bar at bottom of illustration -->
+          <div class="telemetry-ticker">
+            <span>● NODES ACTIVE: 4/4 ZONES</span>
+            <span id="telemetryTime">12:20:00 UTC+5:30</span>
+            <span>FREQ: 10 Hz | PROTOCOL: MQTT/TLS</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- =========================================================================
+         4. CROWD OVERVIEW SECTION ("Your City at a Glance")
+         ========================================================================= -->
+    <section id="overview" class="overview-section">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-tag">Telemetric Pulse</span>
+          <h2 class="section-title">Your City at a Glance</h2>
+          <p class="section-subtitle">
+            Aggregated sensor stream across college, transit, and civic hubs. Clear visibility into space pressure and transit bottlenecks.
+          </p>
+        </div>
+
+        <div class="metric-grid">
+          <!-- Metric Card 1 -->
+          <div class="glass-panel metric-card">
+            <div class="metric-header">
+              <span class="badge-demo">DEMO DATA</span>
+              <div class="metric-icon-wrap">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"></path>
+                  <circle cx="9" cy="7" r="4"></circle>
+                  <path d="M22 21v-2a4 4 0 0 0-3-3.87"></path>
+                  <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+                </svg>
+              </div>
+            </div>
+            <div class="metric-value" id="metricTotalVisitors">1,428</div>
+            <div class="metric-title">Total Simulated Visitors</div>
+            <div class="metric-footer">
+              <span style="color: var(--status-teal)">↑ 12% vs last hour</span>
+              <span class="mono">All 4 Monitored Zones</span>
+            </div>
+          </div>
+
+          <!-- Metric Card 2 -->
+          <div class="glass-panel metric-card">
+            <div class="metric-header">
+              <span class="badge-demo">DEMO DATA</span>
+              <div class="metric-icon-wrap">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M12 2v20"></path>
+                  <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path>
+                </svg>
+              </div>
+            </div>
+            <div class="metric-value" id="metricAvgOccupancy">52.4%</div>
+            <div class="metric-title">Average Occupancy</div>
+            <div class="metric-footer">
+              <span style="color: var(--cyan-electric)">Nominal Threshold</span>
+              <span class="mono">Safe Margin</span>
+            </div>
+          </div>
+
+          <!-- Metric Card 3 -->
+          <div class="glass-panel metric-card">
+            <div class="metric-header">
+              <span class="badge-demo">DEMO DATA</span>
+              <div class="metric-icon-wrap">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <circle cx="12" cy="12" r="10"></circle>
+                  <polyline points="12 6 12 12 16 14"></polyline>
+                </svg>
+              </div>
+            </div>
+            <div class="metric-value" id="metricAvgWait">8.5 min</div>
+            <div class="metric-title">Estimated Waiting Time</div>
+            <div class="metric-footer">
+              <span style="color: var(--status-teal)">↓ 3.2 min lower</span>
+              <span class="mono">Moving Avg Window</span>
+            </div>
+          </div>
+
+          <!-- Metric Card 4 -->
+          <div class="glass-panel metric-card">
+            <div class="metric-header">
+              <span class="badge-demo">DEMO DATA</span>
+              <div class="metric-icon-wrap" style="color: var(--status-coral); background: rgba(255,82,82,0.1); border-color: rgba(255,82,82,0.3)">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z"></path>
+                  <line x1="12" y1="9" x2="12" y2="13"></line>
+                  <line x1="12" y1="17" x2="12.01" y2="17"></line>
+                </svg>
+              </div>
+            </div>
+            <div class="metric-value" style="color: var(--status-coral)">1 of 4</div>
+            <div class="metric-title">High-Crowd Locations</div>
+            <div class="metric-footer">
+              <span style="color: var(--status-coral)">College Canteen alert</span>
+              <span class="mono">Peak Lunch Rush</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- =========================================================================
+         5. LOCATION EXPLORER ("Find a Better Time to Visit")
+         ========================================================================= -->
+    <section id="locations" class="locations-section">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-tag">Smart Routing</span>
+          <h2 class="section-title">Find a Better Time to Visit</h2>
+          <p class="section-subtitle">
+            Compare active locations, assess line delays, and optimize your schedule with real-time sensor analytics.
+          </p>
+        </div>
+
+        <!-- Filter Controls -->
+        <div class="filter-bar">
+          <button class="filter-btn active" data-filter="all">All Locations (4)</button>
+          <button class="filter-btn" data-filter="low">Low Crowd &lt;40%</button>
+          <button class="filter-btn" data-filter="moderate">Moderate 40%–75%</button>
+          <button class="filter-btn" data-filter="high">High Crowd &gt;75%</button>
+        </div>
+
+        <!-- Location Cards Grid -->
+        <div class="locations-grid">
+          <!-- Card 1: College Canteen -->
+          <div class="glass-panel location-card" data-status="high">
+            <div>
+              <div class="location-top">
+                <div class="location-icon-box" style="color: var(--status-coral); background: rgba(255,82,82,0.1); border-color: rgba(255,82,82,0.3)">
+                  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M18 8h1a4 4 0 0 1 0 8h-1"></path>
+                    <path d="M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z"></path>
+                    <line x1="6" y1="1" x2="6" y2="4"></line>
+                    <line x1="10" y1="1" x2="10" y2="4"></line>
+                    <line x1="14" y1="1" x2="14" y2="4"></line>
+                  </svg>
+                </div>
+                <span class="status-pill status-coral">High Crowd</span>
+              </div>
+              <h3 class="location-name">College Canteen</h3>
+              <p class="location-meta">Zone A • Campus Food Court</p>
+
+              <div class="occupancy-bar-wrap">
+                <div class="occupancy-labels">
+                  <span>Occupancy</span>
+                  <span style="color: var(--status-coral)">84%</span>
+                </div>
+                <div class="progress-track">
+                  <div class="progress-fill fill-coral" style="width: 84%"></div>
+                </div>
+              </div>
+
+              <div class="location-stats">
+                <div>
+                  <span style="color: var(--text-muted); display: block;">Est. Wait</span>
+                  <strong style="color: var(--text-cool); font-size: 0.95rem;">⏱ 18 min</strong>
+                </div>
+                <div>
+                  <span style="color: var(--text-muted); display: block;">Flow Rate</span>
+                  <strong style="color: var(--text-cool); font-size: 0.95rem;">14.2 /min</strong>
+                </div>
+              </div>
+
+              <div class="location-recommendation">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <circle cx="12" cy="12" r="10"></circle>
+                  <line x1="12" y1="16" x2="12" y2="12"></line>
+                  <line x1="12" y1="8" x2="12.01" y2="8"></line>
+                </svg>
+                <span>Visit after 1:45 PM or use Counter B</span>
+              </div>
+            </div>
+
+            <button class="btn-outline-cyan btn-view-details" data-location="canteen" style="width: 100%; justify-content: center;">
+              View Details
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <polyline points="9 18 15 12 9 6"></polyline>
+              </svg>
+            </button>
+          </div>
+
+          <!-- Card 2: Hospital Reception -->
+          <div class="glass-panel location-card" data-status="low">
+            <div>
+              <div class="location-top">
+                <div class="location-icon-box" style="color: var(--status-teal); background: rgba(0,245,160,0.1); border-color: rgba(0,245,160,0.3)">
+                  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"></path>
+                  </svg>
+                </div>
+                <span class="status-pill status-teal">Low Crowd</span>
+              </div>
+              <h3 class="location-name">Hospital Reception</h3>
+              <p class="location-meta">Zone B • Civic Healthcare Wing</p>
+
+              <div class="occupancy-bar-wrap">
+                <div class="occupancy-labels">
+                  <span>Occupancy</span>
+                  <span style="color: var(--status-teal)">38%</span>
+                </div>
+                <div class="progress-track">
+                  <div class="progress-fill fill-teal" style="width: 38%"></div>
+                </div>
+              </div>
+
+              <div class="location-stats">
+                <div>
+                  <span style="color: var(--text-muted); display: block;">Est. Wait</span>
+                  <strong style="color: var(--text-cool); font-size: 0.95rem;">⏱ 6 min</strong>
+                </div>
+                <div>
+                  <span style="color: var(--text-muted); display: block;">Flow Rate</span>
+                  <strong style="color: var(--text-cool); font-size: 0.95rem;">4.8 /min</strong>
+                </div>
+              </div>
+
+              <div class="location-recommendation">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <circle cx="12" cy="12" r="10"></circle>
+                  <line x1="12" y1="16" x2="12" y2="12"></line>
+                  <line x1="12" y1="8" x2="12.01" y2="8"></line>
+                </svg>
+                <span>Optimal time to visit. Zero delay at Triage</span>
+              </div>
+            </div>
+
+            <button class="btn-outline-cyan btn-view-details" data-location="hospital" style="width: 100%; justify-content: center;">
+              View Details
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <polyline points="9 18 15 12 9 6"></polyline>
+              </svg>
+            </button>
+          </div>
+
+          <!-- Card 3: Central Bus Stop -->
+          <div class="glass-panel location-card" data-status="moderate">
+            <div>
+              <div class="location-top">
+                <div class="location-icon-box" style="color: var(--status-amber); background: rgba(255,171,0,0.1); border-color: rgba(255,171,0,0.3)">
+                  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M8 6v6"></path>
+                    <path d="M15 6v6"></path>
+                    <path d="M2 12h19.6"></path>
+                    <path d="M18 18h3s.5-1.7.8-2.8c.1-.4.2-.8.2-1.2 0-.4-.1-.8-.2-1.2l-1.4-4.8C20 6.8 19 6 17.7 6H6.3C5 6 4 6.8 3.6 8l-1.4 4.8c-.1.4-.2.8-.2 1.2 0 .4.1.8.2 1.2.3 1.1.8 2.8.8 2.8h3"></path>
+                    <circle cx="7" cy="18" r="2"></circle>
+                    <path d="M9 18h6"></path>
+                    <circle cx="17" cy="18" r="2"></circle>
+                  </svg>
+                </div>
+                <span class="status-pill status-amber">Moderate</span>
+              </div>
+              <h3 class="location-name">Central Bus Stop</h3>
+              <p class="location-meta">Zone C • Urban Transit Platform</p>
+
+              <div class="occupancy-bar-wrap">
+                <div class="occupancy-labels">
+                  <span>Occupancy</span>
+                  <span style="color: var(--status-amber)">62%</span>
+                </div>
+                <div class="progress-track">
+                  <div class="progress-fill fill-amber" style="width: 62%"></div>
+                </div>
+              </div>
+
+              <div class="location-stats">
+                <div>
+                  <span style="color: var(--text-muted); display: block;">Est. Wait</span>
+                  <strong style="color: var(--text-cool); font-size: 0.95rem;">⏱ 11 min</strong>
+                </div>
+                <div>
+                  <span style="color: var(--text-muted); display: block;">Flow Rate</span>
+                  <strong style="color: var(--text-cool); font-size: 0.95rem;">18.5 /min</strong>
+                </div>
+              </div>
+
+              <div class="location-recommendation">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <circle cx="12" cy="12" r="10"></circle>
+                  <line x1="12" y1="16" x2="12" y2="12"></line>
+                  <line x1="12" y1="8" x2="12.01" y2="8"></line>
+                </svg>
+                <span>Bus arriving in 4 min. Platform 2 is clear</span>
+              </div>
+            </div>
+
+            <button class="btn-outline-cyan btn-view-details" data-location="bus-stop" style="width: 100%; justify-content: center;">
+              View Details
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <polyline points="9 18 15 12 9 6"></polyline>
+              </svg>
+            </button>
+          </div>
+
+          <!-- Card 4: Ticket Counter -->
+          <div class="glass-panel location-card" data-status="low">
+            <div>
+              <div class="location-top">
+                <div class="location-icon-box" style="color: var(--status-teal); background: rgba(0,245,160,0.1); border-color: rgba(0,245,160,0.3)">
+                  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <rect width="20" height="14" x="2" y="5" rx="2"></rect>
+                    <line x1="2" x2="22" y1="10" y2="10"></line>
+                  </svg>
+                </div>
+                <span class="status-pill status-teal">Low Crowd</span>
+              </div>
+              <h3 class="location-name">Ticket Counter</h3>
+              <p class="location-meta">Zone D • Metro Interchange Gate</p>
+
+              <div class="occupancy-bar-wrap">
+                <div class="occupancy-labels">
+                  <span>Occupancy</span>
+                  <span style="color: var(--status-teal)">25%</span>
+                </div>
+                <div class="progress-track">
+                  <div class="progress-fill fill-teal" style="width: 25%"></div>
+                </div>
+              </div>
+
+              <div class="location-stats">
+                <div>
+                  <span style="color: var(--text-muted); display: block;">Est. Wait</span>
+                  <strong style="color: var(--text-cool); font-size: 0.95rem;">⏱ 4 min</strong>
+                </div>
+                <div>
+                  <span style="color: var(--text-muted); display: block;">Flow Rate</span>
+                  <strong style="color: var(--text-cool); font-size: 0.95rem;">6.1 /min</strong>
+                </div>
+              </div>
+
+              <div class="location-recommendation">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <circle cx="12" cy="12" r="10"></circle>
+                  <line x1="12" y1="16" x2="12" y2="12"></line>
+                  <line x1="12" y1="8" x2="12.01" y2="8"></line>
+                </svg>
+                <span>Express kiosks open at East Gate</span>
+              </div>
+            </div>
+
+            <button class="btn-outline-cyan btn-view-details" data-location="ticket-counter" style="width: 100%; justify-content: center;">
+              View Details
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <polyline points="9 18 15 12 9 6"></polyline>
+              </svg>
+            </button>
+          </div>
+        </div>
+
+        <div style="text-align: center;">
+          <a href="locations.html" class="btn-secondary">
+            View All Locations &amp; Predictive Heatmap
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <line x1="5" y1="12" x2="19" y2="12"></line>
+              <polyline points="12 5 19 12 12 19"></polyline>
+            </svg>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- =========================================================================
+         6. HOW IT WORKS (Futuristic Three-Step Technical Process)
+         ========================================================================= -->
+    <section id="how-it-works" class="how-it-works-section">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-tag">ENTC System Architecture</span>
+          <h2 class="section-title">How It Works</h2>
+          <p class="section-subtitle">
+            An end-to-end electronic sensing pipeline: from infrared optical hardware transduction to edge computing and IoT cloud distribution.
+          </p>
+        </div>
+
+        <div class="steps-grid">
+          <!-- Step 1 -->
+          <div class="glass-panel step-card">
+            <div class="step-number">01 — SENSE</div>
+            <h3 class="step-title">Optical Hardware Detection</h3>
+            <p class="step-desc">
+              Entry and exit sensors estimate the number of people entering and leaving.
+            </p>
+            <div class="step-tech-specs">
+              <strong>ENTC HARDWARE:</strong><br>
+              Dual IR emitter &amp; photodiode pairs. Optical beam break detects crossing direction with Schmitt-trigger debouncing.
+            </div>
+          </div>
+
+          <!-- Step 2 -->
+          <div class="glass-panel step-card">
+            <div class="step-number">02 — PROCESS</div>
+            <h3 class="step-title">Microcontroller Computation</h3>
+            <p class="step-desc">
+              A microcontroller processes the sensor counts and calculates occupancy.
+            </p>
+            <div class="step-tech-specs">
+              <strong>EMBEDDED LOGIC:</strong><br>
+              ESP32 FreeRTOS microsecond interrupt handler. Computes differential occupant balance: Occupancy = Max(0, In - Out).
+            </div>
+          </div>
+
+          <!-- Step 3 -->
+          <div class="glass-panel step-card">
+            <div class="step-number">03 — INFORM</div>
+            <h3 class="step-title">Cloud Dashboard &amp; Telemetry</h3>
+            <p class="step-desc">
+              The dashboard displays crowd conditions and suggests less crowded alternatives.
+            </p>
+            <div class="step-tech-specs">
+              <strong>TELEMETRY &amp; UI:</strong><br>
+              MQTT publish/subscribe payload over Wi-Fi. Real-time wait estimation using Little's Law with alternative gate recommendations.
+            </div>
+          </div>
+        </div>
+
+        <!-- Technical Flow Banner Diagram -->
+        <div class="tech-flow-banner">
+          <div class="flow-step-item">
+            <div class="flow-step-icon">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M12 2v20"></path>
+                <path d="m4.93 4.93 4.24 4.24"></path>
+                <path d="m14.83 14.83 4.24 4.24"></path>
+                <path d="M2 12h20"></path>
+              </svg>
+            </div>
+            <div>
+              <strong style="color: var(--cyan-electric)">IR Sensors</strong>
+              <div class="mono" style="font-size: 0.75rem; color: var(--text-secondary)">TX / RX Beam Break</div>
+            </div>
+          </div>
+
+          <div class="flow-arrow">➔</div>
+
+          <div class="flow-step-item">
+            <div class="flow-step-icon" style="color: var(--blue-neon); border-color: var(--blue-neon); background: rgba(57,135,255,0.1)">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <rect width="16" height="16" x="4" y="4" rx="2"></rect>
+                <rect width="6" height="6" x="9" y="9" rx="1"></rect>
+                <line x1="9" x2="9" y1="2" y2="4"></line>
+                <line x1="15" x2="15" y1="2" y2="4"></line>
+                <line x1="9" x2="9" y1="20" y2="22"></line>
+                <line x1="15" x2="15" y1="20" y2="22"></line>
+                <line x1="2" x2="4" y1="9" y2="9"></line>
+                <line x1="2" x2="4" y1="15" y2="15"></line>
+                <line x1="20" x2="22" y1="9" y2="9"></line>
+                <line x1="20" x2="22" y1="15" y2="15"></line>
+              </svg>
+            </div>
+            <div>
+              <strong style="color: var(--blue-neon)">Microcontroller</strong>
+              <div class="mono" style="font-size: 0.75rem; color: var(--text-secondary)">ESP32 Edge Engine</div>
+            </div>
+          </div>
+
+          <div class="flow-arrow">➔</div>
+
+          <div class="flow-step-item">
+            <div class="flow-step-icon" style="color: var(--status-teal); border-color: var(--status-teal); background: rgba(0,245,160,0.1)">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <rect width="20" height="14" x="2" y="3" rx="2"></rect>
+                <line x1="8" x2="16" y1="21" y2="21"></line>
+                <line x1="12" x2="12" y1="17" y2="21"></line>
+              </svg>
+            </div>
+            <div>
+              <strong style="color: var(--status-teal)">IoT Dashboard</strong>
+              <div class="mono" style="font-size: 0.75rem; color: var(--text-secondary)">CrowdSense Web UI</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- =========================================================================
+         7. INTERACTIVE SIMULATOR ("What If the Crowd Gets Bigger?")
+         ========================================================================= -->
+    <section id="simulator" class="simulator-section">
+      <div class="container">
+        <div class="simulator-container">
+          <!-- Left side: Narrative & CTA -->
+          <div>
+            <span class="badge-tech">
+              <span class="sensor-dot"></span>
+              QUEUING THEORY ENGINE
+            </span>
+            <h2 class="section-title" style="margin: 1rem 0;">What If the Crowd Gets Bigger?</h2>
+            <p style="color: var(--text-secondary); margin-bottom: 1.5rem; line-height: 1.6;">
+              Visitors and facility planners can experiment with arrival rates, service departures, and capacity limits to understand queue dynamics and prevent sudden stampede bottlenecks.
+            </p>
+
+            <ul style="list-style: none; margin-bottom: 2rem; display: flex; flex-direction: column; gap: 0.6rem;">
+              <li style="display: flex; align-items: center; gap: 0.6rem; font-size: 0.92rem; color: var(--text-cool);">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--cyan-electric)" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                Model surge scenarios (canteen rush hours, train arrivals)
+              </li>
+              <li style="display: flex; align-items: center; gap: 0.6rem; font-size: 0.92rem; color: var(--text-cool);">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--cyan-electric)" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                Calculate queue expansion via M/M/1 queuing physics
+              </li>
+              <li style="display: flex; align-items: center; gap: 0.6rem; font-size: 0.92rem; color: var(--text-cool);">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--cyan-electric)" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                Test counter staffing and load balancing strategies
+              </li>
+            </ul>
+
+            <a href="simulator.html" class="btn-primary">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <polygon points="5 3 19 12 5 21 5 3"></polygon>
+              </svg>
+              Launch Full Crowd Simulator
+            </a>
+          </div>
+
+          <!-- Right side: Live Interactive Mini-Simulator Controls -->
+          <div class="simulator-controls">
+            <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid rgba(255,255,255,0.08); padding-bottom: 0.75rem;">
+              <strong style="color: var(--cyan-electric); font-size: 0.95rem;">Interactive Live Sandbox</strong>
+              <span class="badge-demo">SIMULATED DATA</span>
+            </div>
+
+            <!-- Slider 1: Arrival Rate -->
+            <div class="control-group">
+              <div class="control-header">
+                <span>Arrival Rate (&lambda;)</span>
+                <span id="valArrivalRate">24 /min</span>
+              </div>
+              <input type="range" id="simArrivalRate" min="5" max="60" value="24" aria-label="Arrival Rate">
+              <div style="display: flex; justify-content: space-between; font-size: 0.7rem; color: var(--text-muted);">
+                <span>5 /min (Light)</span>
+                <span>60 /min (Surge)</span>
+              </div>
+            </div>
+
+            <!-- Slider 2: Service Rate -->
+            <div class="control-group">
+              <div class="control-header">
+                <span>Departure / Service Rate (&mu;)</span>
+                <span id="valServiceRate">30 /min</span>
+              </div>
+              <input type="range" id="simServiceRate" min="5" max="60" value="30" aria-label="Service Rate">
+              <div style="display: flex; justify-content: space-between; font-size: 0.7rem; color: var(--text-muted);">
+                <span>5 /min (Slow)</span>
+                <span>60 /min (Fast)</span>
+              </div>
+            </div>
+
+            <!-- Slider 3: Max Space Capacity -->
+            <div class="control-group">
+              <div class="control-header">
+                <span>Zone Capacity Limit (N)</span>
+                <span id="valCapacity">120</span>
+              </div>
+              <input type="range" id="simCapacity" min="30" max="300" step="10" value="120" aria-label="Capacity Limit">
+            </div>
+
+            <!-- Live Queuing Theory Calculated Output -->
+            <div class="sim-output-box">
+              <div>
+                <div style="font-size: 0.72rem; color: var(--text-secondary);">Est. Queue</div>
+                <strong id="outQueueLength" style="font-size: 1.15rem; color: var(--text-cool); font-family: var(--font-mono);">4 people</strong>
+              </div>
+              <div>
+                <div style="font-size: 0.72rem; color: var(--text-secondary);">Est. Wait</div>
+                <strong id="outWaitTime" style="font-size: 1.15rem; color: var(--cyan-electric); font-family: var(--font-mono);">1.2 min</strong>
+              </div>
+              <div>
+                <div style="font-size: 0.72rem; color: var(--text-secondary);">System Flow</div>
+                <strong id="outSimStatus" style="font-size: 0.85rem; font-weight: 700; color: var(--status-teal);">Smooth Flow</strong>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- =========================================================================
+         8. SENSOR & IoT LAB SECTION
+         ========================================================================= -->
+    <section id="sensor-lab" class="lab-section">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-tag">Hardware Engineering</span>
+          <h2 class="section-title">Inside the Sensor &amp; IoT Lab</h2>
+          <p class="section-subtitle">
+            Explore the core electronic building blocks powering our crowd monitoring system. Designed with practical ENTC concepts.
+          </p>
+        </div>
+
+        <div class="lab-grid">
+          <!-- Feature Card 1: Infrared Sensors -->
+          <div class="glass-panel lab-card">
+            <div>
+              <div class="lab-icon-hero">
+                <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M2 12h5"></path>
+                  <path d="M17 12h5"></path>
+                  <circle cx="12" cy="12" r="3"></circle>
+                  <path d="M12 2v5"></path>
+                  <path d="M12 17v5"></path>
+                </svg>
+              </div>
+              <h3 class="lab-title">Infrared Sensors</h3>
+              <p class="lab-body">
+                Active IR transmitter and photodiode receiver pairs mounted across entry gates. Detects directional human crossing based on sequential beam interruption timings (A before B = In; B before A = Out).
+              </p>
+            </div>
+            <div class="lab-entc-pill">
+              ENTC: Optoelectronics, Schmitt Trigger, Analog Debouncing
+            </div>
+          </div>
+
+          <!-- Feature Card 2: Microcontroller Processing -->
+          <div class="glass-panel lab-card">
+            <div>
+              <div class="lab-icon-hero" style="color: var(--blue-neon); border-color: var(--blue-neon); background: rgba(57,135,255,0.1)">
+                <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <rect width="18" height="18" x="3" y="3" rx="2"></rect>
+                  <path d="M7 7h10v10H7z"></path>
+                </svg>
+              </div>
+              <h3 class="lab-title">Microcontroller Processing</h3>
+              <p class="lab-body">
+                Dedicated 32-bit ESP32 running FreeRTOS tasks. GPIO hardware timer interrupts capture microsecond transitions without CPU polling, filtering false reflections and maintaining running tallies.
+              </p>
+            </div>
+            <div class="lab-entc-pill">
+              ENTC: Embedded C++, Hardware Interrupts (ISR), Little's Law
+            </div>
+          </div>
+
+          <!-- Feature Card 3: IoT Connectivity -->
+          <div class="glass-panel lab-card">
+            <div>
+              <div class="lab-icon-hero" style="color: var(--status-teal); border-color: var(--status-teal); background: rgba(0,245,160,0.1)">
+                <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M5 12.55a11 11 0 0 1 14.08 0"></path>
+                  <path d="M1.42 9a16 16 0 0 1 21.16 0"></path>
+                  <path d="M8.53 16.11a6 6 0 0 1 6.95 0"></path>
+                  <line x1="12" y1="20" x2="12.01" y2="20"></line>
+                </svg>
+              </div>
+              <h3 class="lab-title">IoT Connectivity</h3>
+              <p class="lab-body">
+                Lightweight MQTT telemetry over 2.4 GHz Wi-Fi or LoRaWAN. Compact JSON payloads published with TLS encryption to edge brokers, ensuring sub-150ms roundtrip updates under minimal power.
+              </p>
+            </div>
+            <div class="lab-entc-pill">
+              ENTC: RF Telecommunications, MQTT / TCP-IP, LPWAN Architecture
+            </div>
+          </div>
+        </div>
+
+        <div style="text-align: center;">
+          <a href="sensor-lab.html" class="btn-primary">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <polygon points="12 2 2 7 12 12 22 7 12 2"></polygon>
+              <polyline points="2 17 12 22 22 17"></polyline>
+              <polyline points="2 12 12 17 22 12"></polyline>
+            </svg>
+            Explore Interactive Sensor Lab
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- =========================================================================
+         9. LEARNING SECTION ("Learn by Experimenting")
+         ========================================================================= -->
+    <section id="learn" class="learn-section">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-tag">Interactive Education</span>
+          <h2 class="section-title">Learn by Experimenting</h2>
+          <p class="section-subtitle">
+            Strengthen your knowledge of Electronics &amp; Telecommunication Engineering with gamified modules and practical troubleshooting scenarios.
+          </p>
+        </div>
+
+        <div class="learn-grid">
+          <!-- Learn Card 1 -->
+          <div class="glass-panel learn-card">
+            <div class="learn-card-icon">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <circle cx="12" cy="12" r="10"></circle>
+                <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"></path>
+                <line x1="12" y1="17" x2="12.01" y2="17"></line>
+              </svg>
+            </div>
+            <h3 style="font-size: 1.1rem; margin-bottom: 0.5rem;">ENTC Quizzes</h3>
+            <p style="font-size: 0.85rem; color: var(--text-secondary); margin-bottom: 1.25rem;">
+              Test your grasp of IR optical physics, queue math (M/M/1), and embedded interrupt triggers.
+            </p>
+            <span class="badge-demo">12 Questions</span>
+          </div>
+
+          <!-- Learn Card 2 -->
+          <div class="glass-panel learn-card">
+            <div class="learn-card-icon" style="color: var(--blue-neon); border-color: rgba(57,135,255,0.3)">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"></path>
+              </svg>
+            </div>
+            <h3 style="font-size: 1.1rem; margin-bottom: 0.5rem;">Sensor Troubleshooting</h3>
+            <p style="font-size: 0.85rem; color: var(--text-secondary); margin-bottom: 1.25rem;">
+              Diagnose real field faults: ambient sunlight blinding, contact bounce, and dropped MQTT packets.
+            </p>
+            <span class="badge-demo">5 Scenarios</span>
+          </div>
+
+          <!-- Learn Card 3 -->
+          <div class="glass-panel learn-card">
+            <div class="learn-card-icon" style="color: var(--status-teal); border-color: rgba(0,245,160,0.3)">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <line x1="18" y1="20" x2="18" y2="10"></line>
+                <line x1="12" y1="20" x2="12" y2="4"></line>
+                <line x1="6" y1="20" x2="6" y2="14"></line>
+              </svg>
+            </div>
+            <h3 style="font-size: 1.1rem; margin-bottom: 0.5rem;">Queue Optimization</h3>
+            <p style="font-size: 0.85rem; color: var(--text-secondary); margin-bottom: 1.25rem;">
+              Balance counter staffing during simulated rush hours to keep wait time under 5 minutes.
+            </p>
+            <span class="badge-demo">Interactive Lab</span>
+          </div>
+
+          <!-- Learn Card 4 -->
+          <div class="glass-panel learn-card">
+            <div class="learn-card-icon" style="color: var(--status-amber); border-color: rgba(255,171,0,0.3)">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
+              </svg>
+            </div>
+            <h3 style="font-size: 1.1rem; margin-bottom: 0.5rem;">Badges &amp; Progress</h3>
+            <p style="font-size: 0.85rem; color: var(--text-secondary); margin-bottom: 1.25rem;">
+              Unlock "IoT Pioneer", "Hardware Hacker", and "Smart City Architect" certifications.
+            </p>
+            <span class="badge-demo">Track XP</span>
+          </div>
+        </div>
+
+        <!-- Interactive Quick Quiz Teaser -->
+        <div class="quiz-teaser-box">
+          <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 0.75rem;">
+            <span class="badge-tech" style="font-size: 0.7rem;">QUIZ TEASER • ENTC CHALLENGE</span>
+            <span class="mono" style="font-size: 0.75rem; color: var(--cyan-electric)">+50 XP</span>
+          </div>
+          <h4 style="font-size: 1.05rem; margin-bottom: 0.75rem;">
+            How does an entry/exit system determine whether a visitor is entering or leaving using dual IR beams?
+          </h4>
+          <button class="quiz-option-btn" data-correct="false" data-explanation="Beam intensity only measures obstruction thickness, not direction.">
+            A) By measuring the difference in beam light intensity (Lux level)
+          </button>
+          <button class="quiz-option-btn" data-correct="true" data-explanation="Exact ENTC principle: A sequential interruption (Beam 1 cut first then Beam 2 = Entry, Beam 2 cut first then Beam 1 = Exit) provides directional resolution.">
+            B) By checking which sensor beam is interrupted first in sequence
+          </button>
+          <button class="quiz-option-btn" data-correct="false" data-explanation="IR sensors transmit optical light, not ultrasonic Doppler shifts.">
+            C) By utilizing the ultrasonic Doppler frequency shift of moving bodies
+          </button>
+          
+          <div id="quizFeedback" style="display: none; margin-top: 1rem; padding: 0.75rem; border-radius: 6px; border: 1px solid var(--status-teal); font-size: 0.85rem;"></div>
+        </div>
+
+        <div style="text-align: center; margin-top: 2.5rem;">
+          <a href="learn.html" class="btn-primary">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"></path>
+              <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"></path>
+            </svg>
+            Start Learning
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- =========================================================================
+         10. FINAL CALL TO ACTION
+         ========================================================================= -->
+    <section class="cta-section">
+      <div class="container">
+        <div class="cta-box">
+          <div class="badge-tech" style="margin-bottom: 1.25rem;">
+            <span class="sensor-dot"></span>
+            NEXT-GEN QUEUE INTELLIGENCE
+          </div>
+          <h2 class="cta-title">Make Every Queue Smarter.</h2>
+          <p class="cta-desc">
+            Explore the technology, experiment with simulations, and discover smarter ways to manage public spaces.
+          </p>
+          <div class="cta-actions">
+            <a href="dashboard.html" class="btn-primary">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <rect width="7" height="9" x="3" y="3" rx="1"></rect>
+                <rect width="7" height="5" x="14" y="3" rx="1"></rect>
+                <rect width="7" height="9" x="14" y="12" rx="1"></rect>
+                <rect width="7" height="5" x="3" y="16" rx="1"></rect>
+              </svg>
+              Open Dashboard
+            </a>
+            <a href="#sensor-lab" class="btn-secondary">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <circle cx="12" cy="12" r="10"></circle>
+                <polygon points="12 8 8 12 12 16 12 8"></polygon>
+                <line x1="16" y1="12" x2="8" y2="12"></line>
+              </svg>
+              Explore the Technology
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- =========================================================================
+       11. FOOTER
+       ========================================================================= -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-top">
+        <!-- Brand Col -->
+        <div>
+          <a href="index.html" class="nav-brand" style="margin-bottom: 0.5rem; display: inline-flex;">
+            <div class="nav-logo-icon">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--cyan-electric)" stroke-width="2">
+                <path d="M2 12h2a8 8 0 0 1 16 0h2"></path>
+                <path d="M6 12h2a4 4 0 0 1 8 0h2"></path>
+                <circle cx="12" cy="12" r="1.5" fill="var(--cyan-electric)"></circle>
+              </svg>
+            </div>
+            <span>Crowd<span style="color: var(--cyan-electric)">Sense</span></span>
+          </a>
+          <p class="footer-brand-desc">
+            Less Waiting. Smarter Spaces.
+          </p>
+          <div style="margin-top: 1rem;">
+            <span class="badge-tech" style="font-size: 0.68rem;">ENTC • IoT • SMART CITY</span>
+          </div>
+        </div>
+
+        <!-- Col 2: Navigation -->
+        <div>
+          <h4 class="footer-col-title">Navigation</h4>
+          <ul class="footer-links">
+            <li><a href="#hero" class="footer-link">Home</a></li>
+            <li><a href="#overview" class="footer-link">City Overview</a></li>
+            <li><a href="#locations" class="footer-link">Explore Locations</a></li>
+            <li><a href="#how-it-works" class="footer-link">How It Works</a></li>
+          </ul>
+        </div>
+
+        <!-- Col 3: Interactive Tools -->
+        <div>
+          <h4 class="footer-col-title">Engineering Tools</h4>
+          <ul class="footer-links">
+            <li><a href="simulator.html" class="footer-link">Crowd Simulator</a></li>
+            <li><a href="sensor-lab.html" class="footer-link">Sensor &amp; IoT Lab</a></li>
+            <li><a href="learn.html" class="footer-link">Learning Center</a></li>
+            <li><a href="dashboard.html" class="footer-link">Live Dashboard</a></li>
+          </ul>
+        </div>
+
+        <!-- Col 4: Project Context -->
+        <div>
+          <h4 class="footer-col-title">Challenge Details</h4>
+          <p style="font-size: 0.85rem; color: var(--text-secondary); line-height: 1.5; margin-bottom: 0.75rem;">
+            CHAKRAVYUH ENTC AI Vibe Coding Challenge
+          </p>
+          <div class="footer-disclaimer">
+            Educational prototype using simulated data.
+          </div>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <div>
+          &copy; 2026 CrowdSense. Built for the CHAKRAVYUH ENTC AI Vibe Coding Challenge.
+        </div>
+        <div class="mono" style="font-size: 0.78rem; color: var(--cyan-electric);">
+          SYSTEM STATUS: ONLINE (SIMULATED TELEMETRY)
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- =========================================================================
+       Interactive Modal / Drawer for Location Card "View Details"
+       ========================================================================= -->
+  <div id="detailsModal" class="modal-overlay" role="dialog" aria-modal="true" aria-labelledby="modalLocName">
+    <div class="modal-content">
+      <button id="modalClose" class="modal-close-btn" aria-label="Close modal">&times;</button>
+      
+      <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 0.5rem; padding-right: 1.5rem;">
+        <h3 id="modalLocName" style="font-size: 1.45rem; font-weight: 800;">Location Details</h3>
+        <span id="modalStatusBadge" class="status-pill status-teal">Low Crowd</span>
+      </div>
+      <p id="modalLocZone" style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 1.25rem;">Zone Information</p>
+
+      <!-- Key Metrics -->
+      <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.75rem; background: rgba(7,17,31,0.6); padding: 1rem; border-radius: 8px; border: 1px solid var(--card-border); margin-bottom: 1.25rem; text-align: center;">
+        <div>
+          <div style="font-size: 0.75rem; color: var(--text-secondary)">Occupancy</div>
+          <strong id="modalOccRate" style="font-size: 1.25rem; color: var(--cyan-electric); font-family: var(--font-mono);">84%</strong>
+        </div>
+        <div>
+          <div style="font-size: 0.75rem; color: var(--text-secondary)">Est. Wait</div>
+          <strong id="modalWaitVal" style="font-size: 1.25rem; color: var(--text-cool); font-family: var(--font-mono);">18 min</strong>
+        </div>
+        <div>
+          <div style="font-size: 0.75rem; color: var(--text-secondary)">Flow Rate</div>
+          <strong id="modalFlowRate" style="font-size: 1.05rem; color: var(--blue-neon); font-family: var(--font-mono);">14.2/min</strong>
+        </div>
+      </div>
+
+      <!-- Sensor Hardware Diagnostics -->
+      <div style="margin-bottom: 1.25rem;">
+        <h4 style="font-size: 0.92rem; color: var(--cyan-electric); margin-bottom: 0.5rem;">Sensor Telemetry Diagnostics (DEMO DATA)</h4>
+        <div style="font-size: 0.82rem; color: var(--text-secondary); display: grid; grid-template-columns: 1fr 1fr; gap: 0.5rem;">
+          <div>Sensor Nodes: <strong id="modalSensors" style="color: var(--text-cool)">IR-Pair #01 &amp; #02</strong></div>
+          <div>Peak Hours: <strong id="modalPeakHours" style="color: var(--text-cool)">12:30 – 2:00 PM</strong></div>
+          <div>Simulated Entries Today: <strong id="modalEntries" style="color: var(--status-teal)">842</strong></div>
+          <div>Simulated Exits Today: <strong id="modalExits" style="color: var(--blue-neon)">712</strong></div>
+        </div>
+      </div>
+
+      <!-- Actionable Queue Recommendation -->
+      <div style="background: rgba(0,229,255,0.06); border-left: 3px solid var(--cyan-electric); padding: 0.75rem 1rem; border-radius: 4px; font-size: 0.85rem; margin-bottom: 1.5rem;">
+        <strong style="color: var(--cyan-electric)">Smart Space Recommendation:</strong><br>
+        <span id="modalAdvice" style="color: var(--text-cool)">Visit after 1:45 PM or use Counter B</span>
+      </div>
+
+      <div style="display: flex; justify-content: flex-end; gap: 0.75rem;">
+        <a href="dashboard.html" class="btn-primary" style="padding: 0.6rem 1.2rem; font-size: 0.88rem;">
+          Open in Live Dashboard
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Application Engine Script -->
+  <script src="js/app.js"></script>
+</body>
+</html>

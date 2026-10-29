@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Live Dashboard | CrowdSense — Smart Queue &amp; Crowd Management</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/styles.css">
+  <style>
+    .dashboard-header-bar {
+      background: rgba(16, 30, 50, 0.95);
+      border-bottom: 1px solid var(--card-border);
+      padding: 1rem 0;
+    }
+    .dash-grid-top {
+      display: grid;
+      grid-template-columns: 2fr 1fr;
+      gap: 1.5rem;
+      margin-top: 2rem;
+    }
+    .dash-grid-bottom {
+      display: grid;
+      grid-template-columns: 1.2fr 1fr 1fr;
+      gap: 1.5rem;
+      margin-top: 1.5rem;
+      margin-bottom: 3rem;
+    }
+    .chart-container {
+      height: 240px;
+      display: flex;
+      align-items: flex-end;
+      gap: 1.25rem;
+      padding: 1.5rem 0.5rem 0.5rem 0.5rem;
+      border-bottom: 1px solid var(--card-border);
+      position: relative;
+    }
+    .chart-col {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.5rem;
+      height: 100%;
+      justify-content: flex-end;
+    }
+    .chart-bar-fill {
+      width: 100%;
+      border-radius: 4px 4px 0 0;
+      background: linear-gradient(180deg, var(--cyan-electric), var(--blue-neon));
+      transition: height 0.5s ease;
+      position: relative;
+    }
+    .chart-bar-fill:hover {
+      box-shadow: 0 0 14px var(--cyan-electric);
+    }
+    .log-feed {
+      display: flex;
+      flex-direction: column;
+      gap: 0.65rem;
+      max-height: 280px;
+      overflow-y: auto;
+      font-family: var(--font-mono);
+      font-size: 0.78rem;
+    }
+    .log-entry {
+      background: rgba(7, 17, 31, 0.7);
+      border-left: 3px solid var(--cyan-electric);
+      padding: 0.5rem 0.75rem;
+      border-radius: 4px;
+      display: flex;
+      justify-content: space-between;
+    }
+    @media (max-width: 1024px) {
+      .dash-grid-top, .dash-grid-bottom {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navbar -->
+  <header class="site-header">
+    <div class="container nav-container">
+      <a href="index.html" class="nav-brand">
+        <div class="nav-logo-icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M2 12h2a8 8 0 0 1 16 0h2"></path>
+            <path d="M6 12h2a4 4 0 0 1 8 0h2"></path>
+            <circle cx="12" cy="12" r="1.5" fill="var(--cyan-electric)"></circle>
+          </svg>
+        </div>
+        <span>Crowd<span style="color: var(--cyan-electric)">Sense</span></span>
+      </a>
+
+      <nav>
+        <ul class="nav-links">
+          <li><a href="index.html" class="nav-link">Home</a></li>
+          <li><a href="locations.html" class="nav-link">Locations</a></li>
+          <li><a href="simulator.html" class="nav-link">Simulator</a></li>
+          <li><a href="sensor-lab.html" class="nav-link">Sensor Lab</a></li>
+          <li><a href="learn.html" class="nav-link">Learn</a></li>
+        </ul>
+      </nav>
+
+      <div class="nav-actions">
+        <a href="index.html" class="btn-secondary" style="padding: 0.5rem 1rem; font-size: 0.85rem;">
+          ← Back to Homepage
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Live Status Bar -->
+  <div class="dashboard-header-bar">
+    <div class="container" style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 0.75rem;">
+      <div style="display: flex; align-items: center; gap: 0.75rem;">
+        <span class="badge-tech"><span class="sensor-dot"></span> TELEMETRY LIVE</span>
+        <span class="badge-demo">SIMULATED DATA (DEMO)</span>
+        <span style="font-size: 0.85rem; color: var(--text-secondary);">Zone Gateway: ESP32-WROOM-32D</span>
+      </div>
+      <div class="mono" style="font-size: 0.8rem; color: var(--cyan-electric);">
+        MQTT: broker.crowdsense.local:8883 (TLS) | Sync: 10 Hz
+      </div>
+    </div>
+  </div>
+
+  <main class="container" style="padding-top: 1.5rem;">
+    <!-- Metric Overview Row -->
+    <div class="metric-grid">
+      <div class="glass-panel metric-card">
+        <div class="metric-header">
+          <span class="badge-demo">METRIC 01</span>
+          <span style="color: var(--cyan-electric); font-size: 0.8rem;">TOTAL IN</span>
+        </div>
+        <div class="metric-value">3,184</div>
+        <div class="metric-title">Aggregated Ingress (Today)</div>
+        <div class="metric-footer">
+          <span style="color: var(--status-teal)">IR Beam Pairs Active</span>
+          <span class="mono">8 Sensors</span>
+        </div>
+      </div>
+
+      <div class="glass-panel metric-card">
+        <div class="metric-header">
+          <span class="badge-demo">METRIC 02</span>
+          <span style="color: var(--blue-neon); font-size: 0.8rem;">TOTAL OUT</span>
+        </div>
+        <div class="metric-value">2,946</div>
+        <div class="metric-title">Aggregated Egress (Today)</div>
+        <div class="metric-footer">
+          <span style="color: var(--text-secondary)">Net Occupants: 238</span>
+          <span class="mono">Balanced</span>
+        </div>
+      </div>
+
+      <div class="glass-panel metric-card">
+        <div class="metric-header">
+          <span class="badge-demo">METRIC 03</span>
+          <span style="color: var(--status-amber); font-size: 0.8rem;">AVG WAIT</span>
+        </div>
+        <div class="metric-value">8.5 min</div>
+        <div class="metric-title">Mean Service Delay</div>
+        <div class="metric-footer">
+          <span style="color: var(--status-teal)">Within Tolerance</span>
+          <span class="mono">Goal &lt;10m</span>
+        </div>
+      </div>
+
+      <div class="glass-panel metric-card">
+        <div class="metric-header">
+          <span class="badge-demo">METRIC 04</span>
+          <span style="color: var(--status-coral); font-size: 0.8rem;">ALERTS</span>
+        </div>
+        <div class="metric-value" style="color: var(--status-coral)">1 Active</div>
+        <div class="metric-title">Threshold Violations</div>
+        <div class="metric-footer">
+          <span style="color: var(--status-coral)">Canteen Line &gt; 80%</span>
+          <span class="mono">Peak Surge</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Middle Row: Hourly Distribution Chart & Incident Feed -->
+    <div class="dash-grid-top">
+      <!-- Simulated Hourly Occupancy Chart -->
+      <div class="glass-panel" style="padding: 1.75rem;">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.25rem;">
+          <div>
+            <h3 style="font-size: 1.15rem;">Hourly Occupancy Distribution</h3>
+            <p style="font-size: 0.82rem; color: var(--text-secondary);">Simulated visitor volume across peak operational periods</p>
+          </div>
+          <span class="badge-demo">HOURLY (AVG %)</span>
+        </div>
+
+        <div class="chart-container">
+          <div class="chart-col">
+            <div class="chart-bar-fill" style="height: 25%;"></div>
+            <span class="mono" style="font-size: 0.7rem; color: var(--text-muted);">08:00</span>
+          </div>
+          <div class="chart-col">
+            <div class="chart-bar-fill" style="height: 48%;"></div>
+            <span class="mono" style="font-size: 0.7rem; color: var(--text-muted);">09:30</span>
+          </div>
+          <div class="chart-col">
+            <div class="chart-bar-fill" style="height: 65%;"></div>
+            <span class="mono" style="font-size: 0.7rem; color: var(--text-muted);">11:00</span>
+          </div>
+          <div class="chart-col">
+            <div class="chart-bar-fill" style="height: 88%; background: linear-gradient(180deg, var(--status-coral), #b32424);"></div>
+            <span class="mono" style="font-size: 0.7rem; color: var(--status-coral);">12:30 (Peak)</span>
+          </div>
+          <div class="chart-col">
+            <div class="chart-bar-fill" style="height: 72%;"></div>
+            <span class="mono" style="font-size: 0.7rem; color: var(--text-muted);">14:00</span>
+          </div>
+          <div class="chart-col">
+            <div class="chart-bar-fill" style="height: 50%;"></div>
+            <span class="mono" style="font-size: 0.7rem; color: var(--text-muted);">15:30</span>
+          </div>
+          <div class="chart-col">
+            <div class="chart-bar-fill" style="height: 62%;"></div>
+            <span class="mono" style="font-size: 0.7rem; color: var(--text-muted);">17:00</span>
+          </div>
+          <div class="chart-col">
+            <div class="chart-bar-fill" style="height: 35%;"></div>
+            <span class="mono" style="font-size: 0.7rem; color: var(--text-muted);">18:30</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Live Simulated Event / Alert Feed -->
+      <div class="glass-panel" style="padding: 1.75rem;">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.25rem;">
+          <h3 style="font-size: 1.15rem;">Sensor Event Log</h3>
+          <span class="sensor-dot"></span>
+        </div>
+
+        <div class="log-feed">
+          <div class="log-entry" style="border-left-color: var(--status-coral);">
+            <div>
+              <strong style="color: var(--status-coral);">[ALERT] Zone A</strong> Canteen occupancy 84% &gt; threshold.
+            </div>
+            <span style="color: var(--text-muted)">12:21</span>
+          </div>
+          <div class="log-entry">
+            <div>
+              <strong>[INGRESS] Zone C</strong> Bus Stop +4 arrivals detected.
+            </div>
+            <span style="color: var(--text-muted)">12:20</span>
+          </div>
+          <div class="log-entry">
+            <div>
+              <strong>[EGRESS] Zone B</strong> Hospital triage cleared 2 patients.
+            </div>
+            <span style="color: var(--text-muted)">12:19</span>
+          </div>
+          <div class="log-entry">
+            <div>
+              <strong>[HEARTBEAT] ESP32-04</strong> Ticket counter RSSI -62dBm.
+            </div>
+            <span style="color: var(--text-muted)">12:18</span>
+          </div>
+          <div class="log-entry">
+            <div>
+              <strong>[MQTT_PUB]</strong> Telemetry batch 1420 synced.
+            </div>
+            <span style="color: var(--text-muted)">12:17</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Bottom Row: Monitored Zones Breakdown -->
+    <div class="dash-grid-bottom">
+      <!-- Canteen Card -->
+      <div class="glass-panel" style="padding: 1.5rem;">
+        <div style="display: flex; justify-content: space-between; margin-bottom: 0.75rem;">
+          <h4 style="font-size: 1.05rem;">College Canteen</h4>
+          <span class="status-pill status-coral">84% Occupied</span>
+        </div>
+        <p style="font-size: 0.8rem; color: var(--text-secondary); margin-bottom: 1rem;">
+          Wait time: <strong>18 min</strong> • Sensors: IR-01 / IR-02
+        </p>
+        <div class="progress-track" style="margin-bottom: 1rem;">
+          <div class="progress-fill fill-coral" style="width: 84%;"></div>
+        </div>
+        <div class="mono" style="font-size: 0.75rem; color: #ff8585;">
+          Recommended Action: Divert traffic to kiosk counters
+        </div>
+      </div>
+
+      <!-- Hospital Card -->
+      <div class="glass-panel" style="padding: 1.5rem;">
+        <div style="display: flex; justify-content: space-between; margin-bottom: 0.75rem;">
+          <h4 style="font-size: 1.05rem;">Hospital Reception</h4>
+          <span class="status-pill status-teal">38% Low</span>
+        </div>
+        <p style="font-size: 0.8rem; color: var(--text-secondary); margin-bottom: 1rem;">
+          Wait time: <strong>6 min</strong> • Sensors: IR-03 / IR-04
+        </p>
+        <div class="progress-track" style="margin-bottom: 1rem;">
+          <div class="progress-fill fill-teal" style="width: 38%;"></div>
+        </div>
+        <div class="mono" style="font-size: 0.75rem; color: var(--status-teal);">
+          Smooth triage condition. No queuing delay
+        </div>
+      </div>
+
+      <!-- Bus Stop Card -->
+      <div class="glass-panel" style="padding: 1.5rem;">
+        <div style="display: flex; justify-content: space-between; margin-bottom: 0.75rem;">
+          <h4 style="font-size: 1.05rem;">Central Bus Stop</h4>
+          <span class="status-pill status-amber">62% Moderate</span>
+        </div>
+        <p style="font-size: 0.8rem; color: var(--text-secondary); margin-bottom: 1rem;">
+          Wait time: <strong>11 min</strong> • Sensors: IR-05 / IR-06
+        </p>
+        <div class="progress-track" style="margin-bottom: 1rem;">
+          <div class="progress-fill fill-amber" style="width: 62%;"></div>
+        </div>
+        <div class="mono" style="font-size: 0.75rem; color: var(--status-amber);">
+          Platform 2 bus arriving in 4 min
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer class="site-footer" style="padding: 2rem 0;">
+    <div class="container" style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem;">
+      <span style="font-size: 0.85rem; color: var(--text-secondary);">CrowdSense Dashboard • CHAKRAVYUH ENTC Challenge</span>
+      <span class="mono" style="font-size: 0.75rem; color: var(--text-muted);">Simulated Data Environment</span>
+    </div>
+  </footer>
+
+</body>
+</html>

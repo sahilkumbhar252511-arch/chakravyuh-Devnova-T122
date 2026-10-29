@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Learning Center | CrowdSense — ENTC Engineering Academy</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/styles.css">
+  <style>
+    .learn-header-card {
+      background: linear-gradient(135deg, rgba(16, 30, 50, 0.95), rgba(7, 17, 31, 0.98));
+      border: 1px solid var(--card-border);
+      border-radius: var(--radius-lg);
+      padding: 2.5rem;
+      margin-top: 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 1.5rem;
+    }
+    .badge-rack {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+    .achievement-card {
+      background: rgba(7, 17, 31, 0.7);
+      border: 1px solid var(--card-border);
+      border-radius: 8px;
+      padding: 1rem;
+      min-width: 140px;
+      text-align: center;
+      transition: var(--transition);
+    }
+    .achievement-card.unlocked {
+      border-color: var(--cyan-electric);
+      box-shadow: 0 0 15px rgba(0, 229, 255, 0.2);
+    }
+    .troubleshoot-box {
+      background: rgba(7, 17, 31, 0.75);
+      border: 1px solid var(--card-border);
+      border-radius: 8px;
+      padding: 1.5rem;
+      margin-bottom: 1.5rem;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navbar -->
+  <header class="site-header">
+    <div class="container nav-container">
+      <a href="index.html" class="nav-brand">
+        <div class="nav-logo-icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M2 12h2a8 8 0 0 1 16 0h2"></path>
+            <path d="M6 12h2a4 4 0 0 1 8 0h2"></path>
+            <circle cx="12" cy="12" r="1.5" fill="var(--cyan-electric)"></circle>
+          </svg>
+        </div>
+        <span>Crowd<span style="color: var(--cyan-electric)">Sense</span></span>
+      </a>
+
+      <nav>
+        <ul class="nav-links">
+          <li><a href="index.html" class="nav-link">Home</a></li>
+          <li><a href="locations.html" class="nav-link">Locations</a></li>
+          <li><a href="simulator.html" class="nav-link">Simulator</a></li>
+          <li><a href="sensor-lab.html" class="nav-link">Sensor Lab</a></li>
+          <li><a href="learn.html" class="nav-link active">Learn</a></li>
+        </ul>
+      </nav>
+
+      <div class="nav-actions">
+        <a href="dashboard.html" class="btn-primary" style="padding: 0.5rem 1.2rem; font-size: 0.88rem;">
+          Open Dashboard
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <main class="container">
+    <!-- Learning Progress Header -->
+    <div class="learn-header-card">
+      <div>
+        <span class="badge-tech"><span class="sensor-dot"></span> ENTC ACADEMY</span>
+        <h1 style="font-size: 2.2rem; margin: 0.75rem 0 0.5rem 0;">Learn by Experimenting</h1>
+        <p style="color: var(--text-secondary); max-width: 580px;">
+          Master the theoretical concepts and troubleshooting challenges behind IoT crowd monitoring and queue management.
+        </p>
+      </div>
+
+      <div style="text-align: right;">
+        <div style="font-size: 0.8rem; color: var(--text-secondary); margin-bottom: 0.25rem;">YOUR EXPERIENCE POINTS</div>
+        <div id="userXpDisplay" style="font-size: 2.4rem; font-weight: 800; color: var(--cyan-electric); font-family: var(--font-mono);">250 XP</div>
+        <span class="badge-demo" id="userRankDisplay">RANK: IOT APPRENTICE</span>
+      </div>
+    </div>
+
+    <!-- Achievement Badges Rack -->
+    <div style="margin: 2.5rem 0;">
+      <h3 style="font-size: 1.25rem; margin-bottom: 1rem;">Earned Badges &amp; Credentials</h3>
+      <div class="badge-rack">
+        <div class="achievement-card unlocked">
+          <div style="font-size: 1.8rem; margin-bottom: 0.35rem;">⚡</div>
+          <strong style="font-size: 0.85rem; color: var(--cyan-electric); display: block;">IoT Pioneer</strong>
+          <span style="font-size: 0.7rem; color: var(--text-muted)">Unlocked</span>
+        </div>
+        <div class="achievement-card unlocked">
+          <div style="font-size: 1.8rem; margin-bottom: 0.35rem;">📡</div>
+          <strong style="font-size: 0.85rem; color: var(--cyan-electric); display: block;">Sensor Guru</strong>
+          <span style="font-size: 0.7rem; color: var(--text-muted)">Unlocked</span>
+        </div>
+        <div class="achievement-card" id="badgeQueueMaster">
+          <div style="font-size: 1.8rem; margin-bottom: 0.35rem;">⏳</div>
+          <strong style="font-size: 0.85rem; color: var(--text-cool); display: block;">Queue Specialist</strong>
+          <span style="font-size: 0.7rem; color: var(--text-muted)" id="badgeQueueStatus">Solve Quiz to Unlock</span>
+        </div>
+        <div class="achievement-card" id="badgeTroubleshooter">
+          <div style="font-size: 1.8rem; margin-bottom: 0.35rem;">🛠️</div>
+          <strong style="font-size: 0.85rem; color: var(--text-cool); display: block;">Hardware Hacker</strong>
+          <span style="font-size: 0.7rem; color: var(--text-muted)" id="badgeTroubleStatus">Diagnose Fault to Unlock</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Module 1: ENTC Quiz Section -->
+    <div class="glass-panel" style="padding: 2rem; margin-bottom: 2.5rem;">
+      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.25rem;">
+        <h2 style="font-size: 1.4rem;">Module 01: ENTC Core Quiz</h2>
+        <span class="badge-demo">+100 XP REWARD</span>
+      </div>
+      <p style="color: var(--text-secondary); margin-bottom: 1.5rem; font-size: 0.92rem;">
+        Test your knowledge of optics, Little's Law, and embedded firmware architecture.
+      </p>
+
+      <div style="background: rgba(7, 17, 31, 0.6); padding: 1.5rem; border-radius: 8px; border: 1px solid var(--card-border);">
+        <h4 style="font-size: 1.05rem; margin-bottom: 0.75rem;">
+          Question 1: In Little's Law (L = &lambda; &times; W), what does variable W represent?
+        </h4>
+        <button class="quiz-option-btn" onclick="checkLearnQuiz(this, false, 'Incorrect. Total occupants is L.')">
+          A) The total number of people currently inside the space
+        </button>
+        <button class="quiz-option-btn" onclick="checkLearnQuiz(this, true, 'Spot on! W represents the average waiting/dwell time spent by a visitor in the system.')">
+          B) The average time a visitor spends in the system (dwell / wait time)
+        </button>
+        <button class="quiz-option-btn" onclick="checkLearnQuiz(this, false, 'Incorrect. Arrival rate is lambda.')">
+          C) The frequency of people arriving per minute
+        </button>
+        <div id="learnQuiz1Feedback" style="display: none; margin-top: 1rem; padding: 0.75rem; border-radius: 6px; font-size: 0.85rem;"></div>
+      </div>
+    </div>
+
+    <!-- Module 2: Sensor Troubleshooting Challenges -->
+    <div class="glass-panel" style="padding: 2rem; margin-bottom: 3.5rem;">
+      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.25rem;">
+        <h2 style="font-size: 1.4rem;">Module 02: Hardware Field Troubleshooting</h2>
+        <span class="badge-demo">PRACTICAL SCENARIO</span>
+      </div>
+
+      <div class="troubleshoot-box">
+        <div style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.5rem;">
+          <span style="color: var(--status-coral); font-weight: 700;">FAULT #01:</span>
+          <strong>Sudden Ghost Counts at 12:00 PM in College Canteen</strong>
+        </div>
+        <p style="font-size: 0.85rem; color: var(--text-secondary); margin-bottom: 1rem;">
+          At solar noon, the doorway IR photodiode reports 40 false entry pulses per minute even when no person is walking through the gate.
+        </p>
+
+        <div style="display: flex; flex-direction: column; gap: 0.5rem;">
+          <button class="quiz-option-btn" onclick="solveTroubleshoot(this, false, 'Increasing pull-up resistor does not reject optical ambient sunlight saturation.')">
+            Fix 1: Replace pull-up resistor from 10k to 100k
+          </button>
+          <button class="quiz-option-btn" onclick="solveTroubleshoot(this, true, 'Correct! Ambient sunlight contains high-intensity DC infrared light that saturates photodiode receivers. Modulating the IR transmitter at 38 kHz (like a TV remote) with a bandpass filter eliminates sunlight interference.')">
+            Fix 2: Add 38 kHz optical modulation with bandpass filter and narrow daylight shroud
+          </button>
+          <button class="quiz-option-btn" onclick="solveTroubleshoot(this, false, 'Rebooting the ESP32 will not solve optical interference.')">
+            Fix 3: Soft-reboot the ESP32 microcontroller
+          </button>
+        </div>
+        <div id="troubleFeedback" style="display: none; margin-top: 1rem; padding: 0.75rem; border-radius: 6px; font-size: 0.85rem;"></div>
+      </div>
+    </div>
+  </main>
+
+  <footer class="site-footer" style="padding: 2rem 0;">
+    <div class="container" style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem;">
+      <span style="font-size: 0.85rem; color: var(--text-secondary);">CrowdSense Academy • CHAKRAVYUH ENTC Challenge</span>
+      <span class="mono" style="font-size: 0.75rem; color: var(--text-muted);">Simulated Learning Environment</span>
+    </div>
+  </footer>
+
+  <script>
+    let currentXp = 250;
+
+    function checkLearnQuiz(btn, isCorrect, explanation) {
+      const fb = document.getElementById("learnQuiz1Feedback");
+      fb.style.display = "block";
+      if (isCorrect) {
+        btn.classList.add("correct");
+        fb.innerHTML = `<strong>Correct! +100 XP Earned</strong><br>${explanation}`;
+        fb.style.borderColor = "var(--status-teal)";
+        fb.style.color = "var(--status-teal)";
+        fb.style.background = "rgba(0,245,160,0.1)";
+        currentXp += 100;
+        document.getElementById("userXpDisplay").textContent = currentXp + " XP";
+        document.getElementById("badgeQueueMaster").classList.add("unlocked");
+        document.getElementById("badgeQueueStatus").textContent = "Unlocked!";
+        document.getElementById("userRankDisplay").textContent = "RANK: QUEUE SPECIALIST";
+      } else {
+        fb.innerHTML = `<strong>Not quite.</strong><br>${explanation}`;
+        fb.style.borderColor = "var(--status-coral)";
+        fb.style.color = "var(--text-cool)";
+        fb.style.background = "rgba(255,82,82,0.1)";
+      }
+    }
+
+    function solveTroubleshoot(btn, isCorrect, explanation) {
+      const fb = document.getElementById("troubleFeedback");
+      fb.style.display = "block";
+      if (isCorrect) {
+        btn.classList.add("correct");
+        fb.innerHTML = `<strong>Engineering Diagnosis Verified! +150 XP</strong><br>${explanation}`;
+        fb.style.borderColor = "var(--status-teal)";
+        fb.style.color = "var(--status-teal)";
+        fb.style.background = "rgba(0,245,160,0.1)";
+        currentXp += 150;
+        document.getElementById("userXpDisplay").textContent = currentXp + " XP";
+        document.getElementById("badgeTroubleshooter").classList.add("unlocked");
+        document.getElementById("badgeTroubleStatus").textContent = "Unlocked!";
+        document.getElementById("userRankDisplay").textContent = "RANK: HARDWARE ARCHITECT";
+      } else {
+        fb.innerHTML = `<strong>Diagnosis Incorrect:</strong><br>${explanation}`;
+        fb.style.borderColor = "var(--status-coral)";
+        fb.style.color = "var(--text-cool)";
+        fb.style.background = "rgba(255,82,82,0.1)";
+      }
+    }
+  </script>
+</body>
+</html>

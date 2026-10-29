@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sensor &amp; IoT Lab | CrowdSense — Electronics &amp; Telecommunication Bench</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/styles.css">
+  <style>
+    .lab-bench-grid {
+      display: grid;
+      grid-template-columns: 1.1fr 1fr;
+      gap: 2rem;
+      margin: 2.5rem 0 4rem 0;
+    }
+    .scope-screen {
+      background: #020813;
+      border: 1px solid var(--cyan-electric);
+      border-radius: 8px;
+      padding: 1.25rem;
+      position: relative;
+      font-family: var(--font-mono);
+      box-shadow: inset 0 0 20px rgba(0, 229, 255, 0.15);
+    }
+    .scope-wave-line {
+      stroke: var(--cyan-electric);
+      stroke-width: 2.5;
+      fill: none;
+    }
+    .pinout-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.82rem;
+      font-family: var(--font-mono);
+    }
+    .pinout-table th, .pinout-table td {
+      padding: 0.6rem 0.75rem;
+      text-align: left;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    }
+    .pinout-table th {
+      color: var(--cyan-electric);
+      background: rgba(0, 229, 255, 0.05);
+    }
+    .packet-inspector {
+      background: #040913;
+      border: 1px solid rgba(57, 135, 255, 0.25);
+      border-radius: 8px;
+      padding: 1.25rem;
+      font-family: var(--font-mono);
+      font-size: 0.8rem;
+      color: #9cdcfe;
+      overflow-x: auto;
+    }
+    @media (max-width: 992px) {
+      .lab-bench-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navbar -->
+  <header class="site-header">
+    <div class="container nav-container">
+      <a href="index.html" class="nav-brand">
+        <div class="nav-logo-icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M2 12h2a8 8 0 0 1 16 0h2"></path>
+            <path d="M6 12h2a4 4 0 0 1 8 0h2"></path>
+            <circle cx="12" cy="12" r="1.5" fill="var(--cyan-electric)"></circle>
+          </svg>
+        </div>
+        <span>Crowd<span style="color: var(--cyan-electric)">Sense</span></span>
+      </a>
+
+      <nav>
+        <ul class="nav-links">
+          <li><a href="index.html" class="nav-link">Home</a></li>
+          <li><a href="locations.html" class="nav-link">Locations</a></li>
+          <li><a href="simulator.html" class="nav-link">Simulator</a></li>
+          <li><a href="sensor-lab.html" class="nav-link active">Sensor Lab</a></li>
+          <li><a href="learn.html" class="nav-link">Learn</a></li>
+        </ul>
+      </nav>
+
+      <div class="nav-actions">
+        <a href="dashboard.html" class="btn-primary" style="padding: 0.5rem 1.2rem; font-size: 0.88rem;">
+          Open Dashboard
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <main class="container">
+    <div style="margin-top: 2.5rem; text-align: center;">
+      <span class="badge-tech"><span class="sensor-dot"></span> ENTC HARDWARE BENCH</span>
+      <h1 style="font-size: 2.5rem; margin-top: 0.75rem;">Sensor &amp; IoT Hardware Lab</h1>
+      <p style="color: var(--text-secondary); max-width: 640px; margin: 0 auto;">
+        Interactive electronic simulation of the dual infrared beam-break detection mechanism, microcontroller interrupt logic, and MQTT network telemetry.
+      </p>
+    </div>
+
+    <div class="lab-bench-grid">
+      <!-- Left Column: Interactive Beam-Break Bench -->
+      <div class="glass-panel" style="padding: 2rem;">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem;">
+          <h3 style="font-size: 1.25rem;">Virtual Beam-Break Simulator</h3>
+          <span class="badge-demo">LOGIC ANALYZER</span>
+        </div>
+
+        <!-- Scope / Waveform Screen -->
+        <div class="scope-screen" style="margin-bottom: 1.5rem;">
+          <div style="display: flex; justify-content: space-between; font-size: 0.72rem; color: var(--cyan-electric); margin-bottom: 0.5rem;">
+            <span>CH1: GPIO18 (Beam A) [5V/TTL]</span>
+            <span>CH2: GPIO19 (Beam B) [5V/TTL]</span>
+          </div>
+
+          <!-- Digital Waveform Canvas / SVG -->
+          <svg width="100%" height="80" viewBox="0 0 400 80" fill="none">
+            <line x1="0" y1="40" x2="400" y2="40" stroke="rgba(255,255,255,0.06)" stroke-dasharray="4,4" />
+            <!-- Beam A Signal trace -->
+            <path id="traceA" d="M0 25 L120 25 L120 5 L180 5 L180 25 L400 25" stroke="var(--cyan-electric)" stroke-width="2.5" fill="none" />
+            <!-- Beam B Signal trace -->
+            <path id="traceB" d="M0 65 L160 65 L160 45 L220 45 L220 65 L400 65" stroke="var(--blue-neon)" stroke-width="2.5" fill="none" />
+          </svg>
+
+          <div style="display: flex; justify-content: space-between; font-size: 0.7rem; color: var(--text-muted); margin-top: 0.5rem;">
+            <span>T0: Idle (High)</span>
+            <span id="scopeEventLabel" style="color: var(--status-teal);">SEQUENCE: Beam A &rarr; Beam B (ENTRY DETECTED)</span>
+            <span>T_delta: 240ms</span>
+          </div>
+        </div>
+
+        <!-- Interactive Trigger Actions -->
+        <div style="display: flex; flex-direction: column; gap: 0.75rem; margin-bottom: 1.5rem;">
+          <button class="btn-primary" onclick="simulateCrossing('in')">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"></polyline></svg>
+            Simulate Visitor ENTRY (Beam A &rarr; Beam B)
+          </button>
+          <button class="btn-secondary" onclick="simulateCrossing('out')">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 18 9 12 15 6"></polyline></svg>
+            Simulate Visitor EXIT (Beam B &rarr; Beam A)
+          </button>
+        </div>
+
+        <!-- Live Running Counters -->
+        <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.75rem; text-align: center; background: rgba(7,17,31,0.6); padding: 1rem; border-radius: 8px; border: 1px solid var(--card-border);">
+          <div>
+            <div style="font-size: 0.72rem; color: var(--text-secondary)">Total In</div>
+            <strong id="labInCount" style="font-size: 1.3rem; color: var(--status-teal); font-family: var(--font-mono);">14</strong>
+          </div>
+          <div>
+            <div style="font-size: 0.72rem; color: var(--text-secondary)">Total Out</div>
+            <strong id="labOutCount" style="font-size: 1.3rem; color: var(--blue-neon); font-family: var(--font-mono);">8</strong>
+          </div>
+          <div>
+            <div style="font-size: 0.72rem; color: var(--text-secondary)">Current Inside</div>
+            <strong id="labInsideCount" style="font-size: 1.3rem; color: var(--cyan-electric); font-family: var(--font-mono);">6</strong>
+          </div>
+        </div>
+      </div>
+
+      <!-- Right Column: Microcontroller Architecture & MQTT Payload -->
+      <div style="display: flex; flex-direction: column; gap: 1.5rem;">
+        <!-- Pinout Table -->
+        <div class="glass-panel" style="padding: 1.75rem;">
+          <h3 style="font-size: 1.15rem; margin-bottom: 1rem;">ESP32 GPIO Pin Assignment</h3>
+          <table class="pinout-table">
+            <thead>
+              <tr>
+                <th>GPIO PIN</th>
+                <th>MODULE</th>
+                <th>SIGNAL TYPE</th>
+                <th>FUNCTION</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>GPIO 18</td>
+                <td>IR Sensor 1 (TX/RX A)</td>
+                <td>Digital Input (Pull-up)</td>
+                <td>Ingress interrupt ISR</td>
+              </tr>
+              <tr>
+                <td>GPIO 19</td>
+                <td>IR Sensor 2 (TX/RX B)</td>
+                <td>Digital Input (Pull-up)</td>
+                <td>Direction validation ISR</td>
+              </tr>
+              <tr>
+                <td>GPIO 21 / 22</td>
+                <td>SSD1306 OLED (0.96")</td>
+                <td>I2C (SDA / SCL)</td>
+                <td>Local count display</td>
+              </tr>
+              <tr>
+                <td>RF ANT</td>
+                <td>Wi-Fi 802.11 b/g/n</td>
+                <td>2.4 GHz RF</td>
+                <td>MQTT publish (Port 8883)</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- Real-Time MQTT Telemetry Payload -->
+        <div class="glass-panel" style="padding: 1.75rem;">
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.75rem;">
+            <h3 style="font-size: 1.15rem;">MQTT Telemetry Packet Inspector</h3>
+            <span class="mono" style="font-size: 0.75rem; color: var(--status-teal);">TOPIC: crowdsense/zone_a/telemetry</span>
+          </div>
+
+          <pre class="packet-inspector" id="mqttPayloadDisplay">
+{
+  "device_id": "ESP32_ZONE_A_GATE01",
+  "firmware": "v2.4.1-entc-rtos",
+  "timestamp_ms": 1729019284102,
+  "last_event": "INGRESS_VERIFIED",
+  "direction": "IN",
+  "metrics": {
+    "total_in": 14,
+    "total_out": 8,
+    "current_occupancy": 6,
+    "beam_delta_ms": 240
+  },
+  "network": {
+    "rssi_dbm": -64,
+    "qos": 1,
+    "tls_cipher": "ECDHE-RSA-AES128-GCM-SHA256"
+  }
+}
+          </pre>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer class="site-footer" style="padding: 2rem 0;">
+    <div class="container" style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem;">
+      <span style="font-size: 0.85rem; color: var(--text-secondary);">CrowdSense Hardware Lab • CHAKRAVYUH ENTC Challenge</span>
+      <span class="mono" style="font-size: 0.75rem; color: var(--text-muted);">Simulated Electronic Bench</span>
+    </div>
+  </footer>
+
+  <script>
+    let totalIn = 14;
+    let totalOut = 8;
+
+    function simulateCrossing(dir) {
+      const scopeLabel = document.getElementById("scopeEventLabel");
+      const inEl = document.getElementById("labInCount");
+      const outEl = document.getElementById("labOutCount");
+      const insideEl = document.getElementById("labInsideCount");
+      const payloadEl = document.getElementById("mqttPayloadDisplay");
+
+      if (dir === 'in') {
+        totalIn++;
+        scopeLabel.textContent = "SEQUENCE: Beam A \u2192 Beam B (ENTRY DETECTED)";
+        scopeLabel.style.color = "var(--status-teal)";
+      } else {
+        totalOut++;
+        scopeLabel.textContent = "SEQUENCE: Beam B \u2192 Beam A (EXIT DETECTED)";
+        scopeLabel.style.color = "var(--blue-neon)";
+      }
+
+      const inside = Math.max(0, totalIn - totalOut);
+      inEl.textContent = totalIn;
+      outEl.textContent = totalOut;
+      insideEl.textContent = inside;
+
+      const payload = {
+        device_id: "ESP32_ZONE_A_GATE01",
+        firmware: "v2.4.1-entc-rtos",
+        timestamp_ms: Date.now(),
+        last_event: dir === 'in' ? "INGRESS_VERIFIED" : "EGRESS_VERIFIED",
+        direction: dir.toUpperCase(),
+        metrics: {
+          total_in: totalIn,
+          total_out: totalOut,
+          current_occupancy: inside,
+          beam_delta_ms: Math.floor(Math.random() * 80) + 210
+        },
+        network: {
+          rssi_dbm: -62 + Math.floor(Math.random() * 6) - 3,
+          qos: 1,
+          tls_cipher: "ECDHE-RSA-AES128-GCM-SHA256"
+        }
+      };
+
+      payloadEl.textContent = JSON.stringify(payload, null, 2);
+    }
+  </script>
+</body>
+</html>

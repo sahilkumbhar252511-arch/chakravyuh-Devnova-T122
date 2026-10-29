@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Location Explorer | CrowdSense — Smart Space Navigation</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+
+  <!-- Navbar -->
+  <header class="site-header">
+    <div class="container nav-container">
+      <a href="index.html" class="nav-brand">
+        <div class="nav-logo-icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M2 12h2a8 8 0 0 1 16 0h2"></path>
+            <path d="M6 12h2a4 4 0 0 1 8 0h2"></path>
+            <circle cx="12" cy="12" r="1.5" fill="var(--cyan-electric)"></circle>
+          </svg>
+        </div>
+        <span>Crowd<span style="color: var(--cyan-electric)">Sense</span></span>
+      </a>
+
+      <nav>
+        <ul class="nav-links">
+          <li><a href="index.html" class="nav-link">Home</a></li>
+          <li><a href="locations.html" class="nav-link active">Locations</a></li>
+          <li><a href="simulator.html" class="nav-link">Simulator</a></li>
+          <li><a href="sensor-lab.html" class="nav-link">Sensor Lab</a></li>
+          <li><a href="learn.html" class="nav-link">Learn</a></li>
+        </ul>
+      </nav>
+
+      <div class="nav-actions">
+        <a href="dashboard.html" class="btn-primary" style="padding: 0.5rem 1.2rem; font-size: 0.88rem;">
+          Open Dashboard
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <main class="container">
+    <div style="margin-top: 2.5rem; text-align: center;">
+      <span class="badge-tech"><span class="sensor-dot"></span> SMART SPACES</span>
+      <h1 style="font-size: 2.5rem; margin-top: 0.75rem;">Full Location Explorer</h1>
+      <p style="color: var(--text-secondary); max-width: 640px; margin: 0 auto 2rem auto;">
+        Real-time telemetry, historical congestion trends, and predictive advice across all monitored smart city hubs.
+      </p>
+    </div>
+
+    <!-- Location Detailed Grid -->
+    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; margin-bottom: 3.5rem;">
+      <!-- Location 1: Canteen -->
+      <div class="glass-panel" style="padding: 2rem;">
+        <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 1rem;">
+          <div>
+            <span class="badge-demo">ZONE A • CAMPUS</span>
+            <h2 style="font-size: 1.5rem; margin-top: 0.35rem;">College Canteen</h2>
+          </div>
+          <span class="status-pill status-coral">84% Capacity</span>
+        </div>
+        <p style="font-size: 0.88rem; color: var(--text-secondary); margin-bottom: 1.25rem;">
+          Main food hall and express beverage counter. Peak pressure during lunch recess (12:30 PM - 2:00 PM).
+        </p>
+
+        <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.75rem; background: rgba(7,17,31,0.6); padding: 1rem; border-radius: 8px; margin-bottom: 1.25rem; text-align: center;">
+          <div>
+            <div style="font-size: 0.72rem; color: var(--text-secondary);">Est Wait</div>
+            <strong style="color: var(--status-coral); font-family: var(--font-mono); font-size: 1.2rem;">18 min</strong>
+          </div>
+          <div>
+            <div style="font-size: 0.72rem; color: var(--text-secondary);">Current Queue</div>
+            <strong style="color: var(--text-cool); font-family: var(--font-mono); font-size: 1.2rem;">28 people</strong>
+          </div>
+          <div>
+            <div style="font-size: 0.72rem; color: var(--text-secondary);">Throughput</div>
+            <strong style="color: var(--blue-neon); font-family: var(--font-mono); font-size: 1.2rem;">14.2 /min</strong>
+          </div>
+        </div>
+
+        <div style="background: rgba(255,82,82,0.08); border-left: 3px solid var(--status-coral); padding: 0.75rem; border-radius: 4px; font-size: 0.82rem;">
+          <strong style="color: var(--status-coral)">Congestion Warning:</strong> Visit after 1:45 PM or use beverage Counter B for under 3 min wait.
+        </div>
+      </div>
+
+      <!-- Location 2: Hospital -->
+      <div class="glass-panel" style="padding: 2rem;">
+        <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 1rem;">
+          <div>
+            <span class="badge-demo">ZONE B • CIVIC</span>
+            <h2 style="font-size: 1.5rem; margin-top: 0.35rem;">Hospital Reception</h2>
+          </div>
+          <span class="status-pill status-teal">38% Capacity</span>
+        </div>
+        <p style="font-size: 0.88rem; color: var(--text-secondary); margin-bottom: 1.25rem;">
+          Outpatient desk and emergency triage registration. Monitored with non-invasive optical beam break gates.
+        </p>
+
+        <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.75rem; background: rgba(7,17,31,0.6); padding: 1rem; border-radius: 8px; margin-bottom: 1.25rem; text-align: center;">
+          <div>
+            <div style="font-size: 0.72rem; color: var(--text-secondary);">Est Wait</div>
+            <strong style="color: var(--status-teal); font-family: var(--font-mono); font-size: 1.2rem;">6 min</strong>
+          </div>
+          <div>
+            <div style="font-size: 0.72rem; color: var(--text-secondary);">Current Queue</div>
+            <strong style="color: var(--text-cool); font-family: var(--font-mono); font-size: 1.2rem;">3 people</strong>
+          </div>
+          <div>
+            <div style="font-size: 0.72rem; color: var(--text-secondary);">Throughput</div>
+            <strong style="color: var(--blue-neon); font-family: var(--font-mono); font-size: 1.2rem;">4.8 /min</strong>
+          </div>
+        </div>
+
+        <div style="background: rgba(0,245,160,0.08); border-left: 3px solid var(--status-teal); padding: 0.75rem; border-radius: 4px; font-size: 0.82rem;">
+          <strong style="color: var(--status-teal)">Optimal Window:</strong> Triage desks 1 through 3 are fully operational with zero queue delays.
+        </div>
+      </div>
+
+      <!-- Location 3: Bus Stop -->
+      <div class="glass-panel" style="padding: 2rem;">
+        <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 1rem;">
+          <div>
+            <span class="badge-demo">ZONE C • TRANSIT</span>
+            <h2 style="font-size: 1.5rem; margin-top: 0.35rem;">Central Bus Stop</h2>
+          </div>
+          <span class="status-pill status-amber">62% Capacity</span>
+        </div>
+        <p style="font-size: 0.88rem; color: var(--text-secondary); margin-bottom: 1.25rem;">
+          Regional bus bays 1 to 4 with automated passenger entry turnaround.
+        </p>
+
+        <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.75rem; background: rgba(7,17,31,0.6); padding: 1rem; border-radius: 8px; margin-bottom: 1.25rem; text-align: center;">
+          <div>
+            <div style="font-size: 0.72rem; color: var(--text-secondary);">Est Wait</div>
+            <strong style="color: var(--status-amber); font-family: var(--font-mono); font-size: 1.2rem;">11 min</strong>
+          </div>
+          <div>
+            <div style="font-size: 0.72rem; color: var(--text-secondary);">Current Queue</div>
+            <strong style="color: var(--text-cool); font-family: var(--font-mono); font-size: 1.2rem;">14 people</strong>
+          </div>
+          <div>
+            <div style="font-size: 0.72rem; color: var(--text-secondary);">Throughput</div>
+            <strong style="color: var(--blue-neon); font-family: var(--font-mono); font-size: 1.2rem;">18.5 /min</strong>
+          </div>
+        </div>
+
+        <div style="background: rgba(255,171,0,0.08); border-left: 3px solid var(--status-amber); padding: 0.75rem; border-radius: 4px; font-size: 0.82rem;">
+          <strong style="color: var(--status-amber)">Transit Advisory:</strong> Route 14 express bus arriving in 4 min. Platform 2 is less congested.
+        </div>
+      </div>
+
+      <!-- Location 4: Ticket Counter -->
+      <div class="glass-panel" style="padding: 2rem;">
+        <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 1rem;">
+          <div>
+            <span class="badge-demo">ZONE D • METRO</span>
+            <h2 style="font-size: 1.5rem; margin-top: 0.35rem;">Ticket Counter</h2>
+          </div>
+          <span class="status-pill status-teal">25% Capacity</span>
+        </div>
+        <p style="font-size: 0.88rem; color: var(--text-secondary); margin-bottom: 1.25rem;">
+          Smart NFC ticketing stalls and customer service desk at North Terminal.
+        </p>
+
+        <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.75rem; background: rgba(7,17,31,0.6); padding: 1rem; border-radius: 8px; margin-bottom: 1.25rem; text-align: center;">
+          <div>
+            <div style="font-size: 0.72rem; color: var(--text-secondary);">Est Wait</div>
+            <strong style="color: var(--status-teal); font-family: var(--font-mono); font-size: 1.2rem;">4 min</strong>
+          </div>
+          <div>
+            <div style="font-size: 0.72rem; color: var(--text-secondary);">Current Queue</div>
+            <strong style="color: var(--text-cool); font-family: var(--font-mono); font-size: 1.2rem;">2 people</strong>
+          </div>
+          <div>
+            <div style="font-size: 0.72rem; color: var(--text-secondary);">Throughput</div>
+            <strong style="color: var(--blue-neon); font-family: var(--font-mono); font-size: 1.2rem;">6.1 /min</strong>
+          </div>
+        </div>
+
+        <div style="background: rgba(0,245,160,0.08); border-left: 3px solid var(--status-teal); padding: 0.75rem; border-radius: 4px; font-size: 0.82rem;">
+          <strong style="color: var(--status-teal)">Fast Flow:</strong> Automated ticket vending kiosks at East Gate have zero waiting line.
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer class="site-footer" style="padding: 2rem 0;">
+    <div class="container" style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem;">
+      <span style="font-size: 0.85rem; color: var(--text-secondary);">CrowdSense Locations • CHAKRAVYUH ENTC Challenge</span>
+      <span class="mono" style="font-size: 0.75rem; color: var(--text-muted);">Simulated Data Environment</span>
+    </div>
+  </footer>
+
+</body>
+</html>

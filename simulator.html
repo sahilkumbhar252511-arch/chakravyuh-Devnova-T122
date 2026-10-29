@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Crowd Simulator | CrowdSense — Queue Modeling &amp; Analytics</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/styles.css">
+  <style>
+    .sim-page-grid {
+      display: grid;
+      grid-template-columns: 1fr 1.25fr;
+      gap: 2rem;
+      margin: 2.5rem 0 4rem 0;
+    }
+    .queue-visualizer-box {
+      background: rgba(7, 17, 31, 0.85);
+      border: 1px solid var(--card-border);
+      border-radius: var(--radius-md);
+      padding: 1.5rem;
+      min-height: 220px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      position: relative;
+    }
+    .queue-track {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-wrap: wrap;
+      padding: 1rem;
+      background: rgba(0, 0, 0, 0.4);
+      border-radius: 8px;
+      border: 1px dashed rgba(0, 229, 255, 0.2);
+      min-height: 80px;
+    }
+    .queue-person-dot {
+      width: 14px;
+      height: 14px;
+      border-radius: 50%;
+      background: var(--cyan-electric);
+      box-shadow: 0 0 8px var(--cyan-electric);
+      animation: pop-in 0.3s ease;
+    }
+    @keyframes pop-in {
+      0% { transform: scale(0); }
+      100% { transform: scale(1); }
+    }
+    .scenario-btn {
+      padding: 0.5rem 0.85rem;
+      background: rgba(16, 30, 50, 0.6);
+      border: 1px solid var(--card-border);
+      color: var(--text-secondary);
+      border-radius: 6px;
+      font-size: 0.8rem;
+      cursor: pointer;
+      transition: var(--transition);
+    }
+    .scenario-btn:hover, .scenario-btn.active {
+      border-color: var(--cyan-electric);
+      color: var(--cyan-electric);
+      background: rgba(0, 229, 255, 0.1);
+    }
+    @media (max-width: 992px) {
+      .sim-page-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navbar -->
+  <header class="site-header">
+    <div class="container nav-container">
+      <a href="index.html" class="nav-brand">
+        <div class="nav-logo-icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M2 12h2a8 8 0 0 1 16 0h2"></path>
+            <path d="M6 12h2a4 4 0 0 1 8 0h2"></path>
+            <circle cx="12" cy="12" r="1.5" fill="var(--cyan-electric)"></circle>
+          </svg>
+        </div>
+        <span>Crowd<span style="color: var(--cyan-electric)">Sense</span></span>
+      </a>
+
+      <nav>
+        <ul class="nav-links">
+          <li><a href="index.html" class="nav-link">Home</a></li>
+          <li><a href="locations.html" class="nav-link">Locations</a></li>
+          <li><a href="simulator.html" class="nav-link active">Simulator</a></li>
+          <li><a href="sensor-lab.html" class="nav-link">Sensor Lab</a></li>
+          <li><a href="learn.html" class="nav-link">Learn</a></li>
+        </ul>
+      </nav>
+
+      <div class="nav-actions">
+        <a href="dashboard.html" class="btn-primary" style="padding: 0.5rem 1.2rem; font-size: 0.88rem;">
+          Open Dashboard
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <main class="container">
+    <div style="margin-top: 2.5rem; text-align: center;">
+      <span class="badge-tech"><span class="sensor-dot"></span> MATHEMATICAL QUEUE ENGINE</span>
+      <h1 style="font-size: 2.5rem; margin-top: 0.75rem;">Interactive Crowd &amp; Queue Simulator</h1>
+      <p style="color: var(--text-secondary); max-width: 640px; margin: 0 auto;">
+        Model foot traffic surges, tune service counters, and test queuing dynamics using standard M/M/c and Little's Law equations.
+      </p>
+    </div>
+
+    <!-- Quick Scenario Presets -->
+    <div style="display: flex; justify-content: center; gap: 0.75rem; margin-top: 1.5rem; flex-wrap: wrap;">
+      <button class="scenario-btn active" onclick="loadScenario(20, 2, 12, 'Morning Regular Flow')">Morning Normal (2 Desks)</button>
+      <button class="scenario-btn" onclick="loadScenario(45, 2, 14, 'Canteen Lunch Surge')">Lunch Rush Hour (Bottleneck)</button>
+      <button class="scenario-btn" onclick="loadScenario(55, 4, 15, 'Transit Metro Dump')">Metro Arrival (4 Desks)</button>
+      <button class="scenario-btn" onclick="loadScenario(12, 1, 15, 'Quiet Evening')">Quiet Evening (1 Desk)</button>
+    </div>
+
+    <div class="sim-page-grid">
+      <!-- Left Column: Controls -->
+      <div class="glass-panel" style="padding: 2rem;">
+        <h3 style="font-size: 1.25rem; margin-bottom: 1.25rem; display: flex; justify-content: space-between;">
+          <span>Simulation Parameters</span>
+          <span class="badge-demo">M/M/c QUEUE</span>
+        </h3>
+
+        <!-- Control: Arrival Rate -->
+        <div class="control-group" style="margin-bottom: 1.25rem;">
+          <div class="control-header">
+            <span>Arrival Rate (&lambda;)</span>
+            <span id="pageValArrival">20 /min</span>
+          </div>
+          <input type="range" id="pageSliderArrival" min="5" max="80" value="20">
+          <span style="font-size: 0.72rem; color: var(--text-muted)">People entering via IR beam sensor per minute</span>
+        </div>
+
+        <!-- Control: Service Counters -->
+        <div class="control-group" style="margin-bottom: 1.25rem;">
+          <div class="control-header">
+            <span>Active Service Counters (c)</span>
+            <span id="pageValServers">2 Desks</span>
+          </div>
+          <input type="range" id="pageSliderServers" min="1" max="6" value="2">
+          <span style="font-size: 0.72rem; color: var(--text-muted)">Staffed checkout/triage service points</span>
+        </div>
+
+        <!-- Control: Service Capacity per Counter -->
+        <div class="control-group" style="margin-bottom: 1.5rem;">
+          <div class="control-header">
+            <span>Service Speed per Desk (&mu;)</span>
+            <span id="pageValService">12 /min</span>
+          </div>
+          <input type="range" id="pageSliderService" min="5" max="25" value="12">
+          <span style="font-size: 0.72rem; color: var(--text-muted)">Max visitors served per counter per minute</span>
+        </div>
+
+        <div style="background: rgba(0,0,0,0.3); border-radius: 8px; padding: 1rem; border: 1px solid var(--card-border);">
+          <div style="font-size: 0.8rem; color: var(--cyan-electric); margin-bottom: 0.35rem; font-weight: 700;">
+            Little's Law Formula: L = &lambda; &times; W
+          </div>
+          <p style="font-size: 0.76rem; color: var(--text-secondary); line-height: 1.4;">
+            The long-term average number of occupants (L) equals the long-term average arrival rate (&lambda;) multiplied by the average time spent in the system (W).
+          </p>
+        </div>
+      </div>
+
+      <!-- Right Column: Visualizer & Calculated Metrics -->
+      <div style="display: flex; flex-direction: column; gap: 1.5rem;">
+        <!-- Live Visual Queue Representation -->
+        <div class="queue-visualizer-box">
+          <div style="display: flex; justify-content: space-between; align-items: center;">
+            <strong style="font-size: 0.95rem; color: var(--text-cool);">Physical Queue Line Visualization</strong>
+            <span id="visualStatusPill" class="status-pill status-teal">Optimal State</span>
+          </div>
+
+          <div style="margin: 1rem 0;">
+            <div style="font-size: 0.75rem; color: var(--text-muted); margin-bottom: 0.5rem; display: flex; justify-content: space-between;">
+              <span>ENTRY BEAM (A &rarr; B)</span>
+              <span>SERVICE DESKS</span>
+            </div>
+            <div class="queue-track" id="queueTrack">
+              <!-- Dots dynamically inserted -->
+            </div>
+          </div>
+
+          <div class="mono" style="font-size: 0.75rem; color: var(--text-secondary); display: flex; justify-content: space-between;">
+            <span>Current Queue Size: <strong id="valDotCount" style="color: var(--cyan-electric);">4</strong></span>
+            <span>Space Pressure: <strong id="valUtilization" style="color: var(--status-teal);">83%</strong></span>
+          </div>
+        </div>
+
+        <!-- Metric Outcome Cards -->
+        <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem;">
+          <div class="glass-panel" style="padding: 1.25rem; text-align: center;">
+            <div style="font-size: 0.75rem; color: var(--text-secondary);">Avg Wait Time (W)</div>
+            <div id="statWaitTime" style="font-size: 1.5rem; font-weight: 800; color: var(--cyan-electric); font-family: var(--font-mono); margin: 0.25rem 0;">1.8 min</div>
+            <div style="font-size: 0.7rem; color: var(--text-muted);">From entry to exit</div>
+          </div>
+
+          <div class="glass-panel" style="padding: 1.25rem; text-align: center;">
+            <div style="font-size: 0.75rem; color: var(--text-secondary);">Queue Length (Lq)</div>
+            <div id="statQueueLength" style="font-size: 1.5rem; font-weight: 800; color: var(--text-cool); font-family: var(--font-mono); margin: 0.25rem 0;">4 people</div>
+            <div style="font-size: 0.7rem; color: var(--text-muted);">In waiting line</div>
+          </div>
+
+          <div class="glass-panel" style="padding: 1.25rem; text-align: center;">
+            <div style="font-size: 0.75rem; color: var(--text-secondary);">Counter Load (&rho;)</div>
+            <div id="statServerLoad" style="font-size: 1.5rem; font-weight: 800; color: var(--status-teal); font-family: var(--font-mono); margin: 0.25rem 0;">83%</div>
+            <div style="font-size: 0.7rem; color: var(--text-muted);">System capacity</div>
+          </div>
+        </div>
+
+        <!-- Action Banner -->
+        <div class="glass-panel" style="padding: 1.25rem; display: flex; justify-content: space-between; align-items: center;">
+          <div>
+            <strong style="color: var(--text-cool); font-size: 0.95rem;">Want to test this with real sensor pinouts?</strong>
+            <p style="font-size: 0.8rem; color: var(--text-secondary);">Check out our virtual ENTC Hardware Lab.</p>
+          </div>
+          <a href="sensor-lab.html" class="btn-primary" style="padding: 0.5rem 1rem; font-size: 0.85rem;">
+            Open Sensor Lab &rarr;
+          </a>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer class="site-footer" style="padding: 2rem 0;">
+    <div class="container" style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem;">
+      <span style="font-size: 0.85rem; color: var(--text-secondary);">CrowdSense Simulator • Educational Prototype</span>
+      <span class="mono" style="font-size: 0.75rem; color: var(--text-muted);">Simulated Mathematical Modeling</span>
+    </div>
+  </footer>
+
+  <script>
+    const sliderArrival = document.getElementById("pageSliderArrival");
+    const sliderServers = document.getElementById("pageSliderServers");
+    const sliderService = document.getElementById("pageSliderService");
+
+    const valArrival = document.getElementById("pageValArrival");
+    const valServers = document.getElementById("pageValServers");
+    const valService = document.getElementById("pageValService");
+
+    const statWaitTime = document.getElementById("statWaitTime");
+    const statQueueLength = document.getElementById("statQueueLength");
+    const statServerLoad = document.getElementById("statServerLoad");
+    const queueTrack = document.getElementById("queueTrack");
+    const valDotCount = document.getElementById("valDotCount");
+    const valUtilization = document.getElementById("valUtilization");
+    const visualStatusPill = document.getElementById("visualStatusPill");
+
+    function updateSimulation() {
+      const lambda = parseFloat(sliderArrival.value);
+      const c = parseInt(sliderServers.value);
+      const mu = parseFloat(sliderService.value);
+
+      valArrival.textContent = lambda + " /min";
+      valServers.textContent = c + (c === 1 ? " Desk" : " Desks");
+      valService.textContent = mu + " /min";
+
+      const totalCapacity = c * mu;
+      const rho = lambda / totalCapacity; // Utilization
+
+      let queueLength = 0;
+      let waitTime = 0;
+
+      if (rho < 0.98) {
+        queueLength = Math.max(1, Math.round((Math.pow(rho, 2) / (1 - rho)) * 1.5));
+        waitTime = (queueLength / lambda).toFixed(1);
+      } else {
+        const excess = (lambda - totalCapacity) * 3;
+        queueLength = Math.round(25 + excess);
+        waitTime = (queueLength / totalCapacity * 1.5).toFixed(1);
+      }
+
+      const utilPercent = Math.min(100, Math.round(rho * 100));
+      statServerLoad.textContent = utilPercent + "%";
+      statQueueLength.textContent = queueLength + " people";
+      statWaitTime.textContent = waitTime + " min";
+
+      valDotCount.textContent = queueLength;
+      valUtilization.textContent = utilPercent + "%";
+
+      if (utilPercent < 75) {
+        statServerLoad.style.color = "var(--status-teal)";
+        visualStatusPill.className = "status-pill status-teal";
+        visualStatusPill.textContent = "Optimal Flow";
+      } else if (utilPercent <= 95) {
+        statServerLoad.style.color = "var(--status-amber)";
+        visualStatusPill.className = "status-pill status-amber";
+        visualStatusPill.textContent = "Moderate Line";
+      } else {
+        statServerLoad.style.color = "var(--status-coral)";
+        visualStatusPill.className = "status-pill status-coral";
+        visualStatusPill.textContent = "Congestion Alert!";
+      }
+
+      // Render dots
+      queueTrack.innerHTML = "";
+      const displayDots = Math.min(32, queueLength);
+      for (let i = 0; i < displayDots; i++) {
+        const dot = document.createElement("div");
+        dot.className = "queue-person-dot";
+        if (utilPercent > 95) dot.style.background = "var(--status-coral)";
+        else if (utilPercent > 75) dot.style.background = "var(--status-amber)";
+        queueTrack.appendChild(dot);
+      }
+    }
+
+    function loadScenario(arr, serv, speed, name) {
+      sliderArrival.value = arr;
+      sliderServers.value = serv;
+      sliderService.value = speed;
+      document.querySelectorAll(".scenario-btn").forEach(b => b.classList.remove("active"));
+      event.target.classList.add("active");
+      updateSimulation();
+    }
+
+    [sliderArrival, sliderServers, sliderService].forEach(s => s.addEventListener("input", updateSimulation));
+    updateSimulation();
+  </script>
+</body>
+</html>
